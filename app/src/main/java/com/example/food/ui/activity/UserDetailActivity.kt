@@ -35,7 +35,7 @@ class UserDetailActivity : AppCompatActivity() {
         email = findViewById(R.id.email)
         mActionBar = findViewById(R.id.myActionBar)
         //侧滑菜单
-        mActionBar.setData(
+        mActionBar?.setData(
             mActivity,
             "员工信息",
             R.drawable.ic_back,
@@ -52,10 +52,10 @@ class UserDetailActivity : AppCompatActivity() {
             })
         mUser = intent.getSerializableExtra("user") as User?
         if (mUser != null) {
-            account.setText(mUser!!.account)
-            nickName.setText(mUser!!.nickName)
-            age.setText(mUser!!.age.toString())
-            email.setText(mUser!!.email)
+            account?.setText(mUser!!.account)
+            nickName?.setText(mUser!!.nickName)
+            age?.setText(mUser!!.age.toString())
+            email?.setText(mUser!!.email)
         }
     }
 

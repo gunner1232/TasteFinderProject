@@ -52,11 +52,11 @@ class UserManageFragment : Fragment() {
         //获取控件
         initView()
         //软键盘搜索
-        ivSearch.setOnClickListener(View.OnClickListener {
+        ivSearch?.setOnClickListener(View.OnClickListener {
             loadData() //加载数据
         })
         //点击软键盘中的搜索
-        etQuery.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        etQuery?.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 loadData() //加载数据
                 return@OnEditorActionListener true

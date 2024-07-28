@@ -11,7 +11,7 @@ import com.example.food.R
 import com.example.food.bean.User
 import com.example.food.widget.ActionBar
 import com.example.food.widget.ActionBar.ActionBarClickListener
-import org.litepal.crud.DataSupport
+import org.litepal.LitePal
 
 /**
  * 重置密码
@@ -68,7 +68,7 @@ class PasswordActivity : AppCompatActivity() {
             Toast.makeText(activity, "新密码为空", Toast.LENGTH_LONG).show()
             return
         }
-        val user = DataSupport.where("account = ? and email = ?", account, email).findFirst(
+        val user = LitePal.where("account = ? and email = ?", account, email).findFirst(
             User::class.java
         )
         if (user != null) {

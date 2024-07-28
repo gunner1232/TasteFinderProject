@@ -1,6 +1,6 @@
 package com.example.food.bean
 
-import org.litepal.crud.DataSupport
+import org.litepal.crud.LitePalSupport
 import java.io.Serializable
 
 class Orders(//账号
@@ -9,4 +9,4 @@ class Orders(//账号
     var number: String, //数量
     var amount: String, //时间
     var date: String
-) : DataSupport(), Serializable
+) : LitePalSupport(), Serializable

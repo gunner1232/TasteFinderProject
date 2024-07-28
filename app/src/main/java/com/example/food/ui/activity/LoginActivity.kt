@@ -17,7 +17,6 @@ import com.example.food.util.SPUtils
 import com.example.food.widget.ActionBar
 import com.example.food.widget.ActionBar.ActionBarClickListener
 import org.litepal.LitePal
-import org.litepal.crud.DataSupport
 
 /**
  * 登录页面
@@ -66,7 +65,7 @@ class LoginActivity : Activity() {
             startActivity(intent)
         }
         //选择类型
-        rgType.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
+        rgType?.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
             SPUtils.put(
                 activity,
                 SPUtils.IS_ADMIN,

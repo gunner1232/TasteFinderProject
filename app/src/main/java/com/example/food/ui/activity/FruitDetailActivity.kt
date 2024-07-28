@@ -49,71 +49,74 @@ class FruitDetailActivity : AppCompatActivity() {
         btnCancel = findViewById(R.id.btn_cancel)
         mActionBar = findViewById(R.id.myActionBar)
         //侧滑菜单
-        mActionBar?.let{actionBar-> actionBar.setData(
-            mActivity,
-            "明细信息",
-            R.drawable.ic_back,
-            0,
-            0,
-            resources.getColor(R.color.colorPrimary),
-            object : ActionBarClickListener {
-                override fun onLeftClick() {
-                    finish()
-                }
+        mActionBar?.let { actionBar ->
+            actionBar.setData(
+                mActivity,
+                "明细信息",
+                R.drawable.ic_back,
+                0,
+                0,
+                resources.getColor(R.color.colorPrimary),
+                object : ActionBarClickListener {
+                    override fun onLeftClick() {
+                        finish()
+                    }
 
-                override fun onRightClick() {
-                }
+                    override fun onRightClick() {
+                    }
+                })
+            val fruit = intent.getSerializableExtra("fruit") as Fruit?
+            tvTitle?.setText(fruit!!.title)
+            tvDate?.setText(fruit?.date)
+            tvContent?.setText(fruit?.content)
+            tvIssuer?.setText(String.format("￥ %s", fruit?.issuer))
+
+//            Glide.with(mActivity)
+//                .asBitmap()
+//                .skipMemoryCache(true)
+//                .load(fruit?.img)
+//                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                .into(ivImg)
+            val account = SPUtils.get(mActivity, SPUtils.ACCOUNT, "") as String
+            val browse = LitePal.where("account = ? and title = ?", account, fruit?.title).findFirst(
+                Browse::class.java
+            ) //浏览记录
+            if (browse == null) { //不存在该条浏览记录  新增记录
+                val browse1 = Browse(account, fruit!!.title)
+                browse1.save()
+            }
+            val isAdmin = SPUtils.get(mActivity, SPUtils.IS_ADMIN, false) as Boolean
+            if (!isAdmin) {
+                val order =
+                    LitePal.where("account = ? and title = ?", account, fruit?.title).findFirst(
+                        Orders::class.java
+                    )
+                btnCollect?.setVisibility(if (order != null) View.GONE else View.VISIBLE)
+                btnCancel?.setVisibility(if (order != null) View.VISIBLE else View.GONE)
+            }
+            //收藏
+            btnCollect?.setOnClickListener(View.OnClickListener {
+                val order = Orders(
+                    account, fruit!!.title, "S" + System.currentTimeMillis(), account, sf.format(
+                        Date()
+                    )
+                )
+                order.save()
+                Toast.makeText(mActivity, "点餐成功", Toast.LENGTH_SHORT).show()
+                btnCollect?.setVisibility(View.GONE)
+                btnCancel?.setVisibility(View.VISIBLE)
             })
-        val fruit = intent.getSerializableExtra("fruit") as Fruit?
-        tvTitle.setText(fruit!!.title)
-        tvDate.setText(fruit.date)
-        tvContent.setText(fruit.content)
-        tvIssuer.setText(String.format("￥ %s", fruit.issuer))
-        Glide.with(mActivity)
-            .asBitmap()
-            .skipMemoryCache(true)
-            .load(fruit.img)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .into(ivImg)
-        val account = SPUtils.get(mActivity, SPUtils.ACCOUNT, "") as String
-        val browse = LitePal.where("account = ? and title = ?", account, fruit.title).findFirst(
-            Browse::class.java
-        ) //浏览记录
-        if (browse == null) { //不存在该条浏览记录  新增记录
-            val browse1 = Browse(account, fruit.title)
-            browse1.save()
+            //取消收藏
+            btnCancel?.setOnClickListener(View.OnClickListener {
+                val order =
+                    LitePal.where("account = ? and title = ?", account, fruit?.title).findFirst(
+                        Orders::class.java
+                    )
+                order.delete()
+                Toast.makeText(mActivity, "取消成功", Toast.LENGTH_SHORT).show()
+                btnCollect?.setVisibility(View.VISIBLE)
+                btnCancel?.setVisibility(View.GONE)
+            })
         }
-        val isAdmin = SPUtils.get(mActivity, SPUtils.IS_ADMIN, false) as Boolean
-        if (!isAdmin) {
-            val order =
-                LitePal.where("account = ? and title = ?", account, fruit.title).findFirst(
-                    Orders::class.java
-                )
-            btnCollect.setVisibility(if (order != null) View.GONE else View.VISIBLE)
-            btnCancel.setVisibility(if (order != null) View.VISIBLE else View.GONE)
-        }
-        //收藏
-        btnCollect.setOnClickListener(View.OnClickListener {
-            val order = Orders(
-                account, fruit.title, "S" + System.currentTimeMillis(), account, sf.format(
-                    Date()
-                )
-            )
-            order.save()
-            Toast.makeText(mActivity, "点餐成功", Toast.LENGTH_SHORT).show()
-            btnCollect.setVisibility(View.GONE)
-            btnCancel.setVisibility(View.VISIBLE)
-        })
-        //取消收藏
-        btnCancel.setOnClickListener(View.OnClickListener {
-            val order =
-                DataSupport.where("account = ? and title = ?", account, fruit.title).findFirst(
-                    Orders::class.java
-                )
-            order.delete()
-            Toast.makeText(mActivity, "取消成功", Toast.LENGTH_SHORT).show()
-            btnCollect.setVisibility(View.VISIBLE)
-            btnCancel.setVisibility(View.GONE)
-        })
     }
 }

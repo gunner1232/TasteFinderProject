@@ -1,6 +1,6 @@
 package com.example.food.bean
 
-import org.litepal.crud.DataSupport
+import org.litepal.crud.LitePalSupport
 
 /**
  * 浏览记录
@@ -8,4 +8,4 @@ import org.litepal.crud.DataSupport
 class Browse(//账号
     var account: String, //菜品标题
     var title: String
-) : DataSupport()
+) : LitePalSupport()

@@ -16,6 +16,7 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.food.R
+import com.example.food.MyApplication
 import com.example.food.adapter.FruitAdapter
 import com.example.food.bean.Fruit
 import com.example.food.ui.activity.AddFruitActivity
@@ -25,7 +26,7 @@ import com.example.food.util.SPUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import org.litepal.crud.DataSupport
+import org.litepal.LitePal
 
 /**
  * 水果
@@ -65,11 +66,11 @@ class FruitFragment : Fragment() {
         //获取控件
         initView()
         //软键盘搜索
-        ivSearch.setOnClickListener(View.OnClickListener {
+        ivSearch?.setOnClickListener(View.OnClickListener {
             loadData() //加载数据
         })
         //点击软键盘中的搜索
-        etQuery.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        etQuery?.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 loadData() //加载数据
                 return@OnEditorActionListener true
@@ -109,23 +110,81 @@ class FruitFragment : Fragment() {
         //=2.3、设置recyclerView的适配器
         rvfruitList!!.adapter = mfruitAdapter
         loadData()
-        mfruitAdapter!!.setItemListener { fruit ->
-            val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
-            val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
-            if ("" == account) { //未登录,跳转到登录页面
-                MyApplication?.Instance?.mainActivity?.finish()
-                startActivity(Intent(myActivity, LoginActivity::class.java))
-            } else {
-                //已经登录
-                val intent = if (isAdmin) {
-                    Intent(myActivity, AddFruitActivity::class.java)
-                } else {
-                    Intent(myActivity, FruitDetailActivity::class.java)
+
+//        mfruitAdapter!!.setItemListener { fruit ->
+//            val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
+//            val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
+//            if ("" == account) { //未登录,跳转到登录页面
+//                MyApplication?.Instance?.mainActivity?.finish()
+//                startActivity(Intent(myActivity, LoginActivity::class.java))
+//            } else {
+//                //已经登录
+//                val intent = if (isAdmin) {
+//                    Intent(myActivity, AddFruitActivity::class.java)
+//                } else {
+//                    Intent(myActivity, FruitDetailActivity::class.java)
+//                }
+//                intent.putExtra("fruit", fruit)
+//                startActivityForResult(intent, 100)
+//            }
+//        }
+
+
+        mfruitAdapter!!.setItemListener(object : FruitAdapter.ItemListener {
+//            override fun itemClick(fruit: Fruit) {
+//                val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
+//                val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
+//                if (account.isEmpty()) { // 未登录, 跳转到登录页面
+//                    MyApplication.Instance?.mainActivity?.finish()
+//                    startActivity(Intent(myActivity, LoginActivity::class.java))
+//                } else { // 已经登录
+//                    val intent = if (isAdmin) {
+//                        Intent(myActivity, AddFruitActivity::class.java)
+//                    } else {
+//                        Intent(myActivity, FruitDetailActivity::class.java)
+//                    }
+//                    intent.putExtra("fruit", fruit)
+//                    startActivityForResult(intent, 100)
+//                }
+//            }
+
+//            override fun ItemClick(fruit: Fruit) {
+//                val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
+//                val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
+//                if (account.isEmpty()) { // 未登录, 跳转到登录页面
+////                    MyApplication.Instance.getMainActivity().finish()
+//                    MyApplication.instance.mainActivity?.finish()
+//                    startActivity(Intent(myActivity, LoginActivity::class.java))
+//                } else { // 已经登录
+//                    val intent = if (isAdmin) {
+//                        Intent(myActivity, AddFruitActivity::class.java)
+//                    } else {
+//                        Intent(myActivity, FruitDetailActivity::class.java)
+//                    }
+//                    intent.putExtra("fruit", fruit)
+//                    startActivityForResult(intent, 100)
+//                }
+//            }
+
+            override fun ItemClick(fruit: Fruit?) { val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
+                val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
+                if (account.isEmpty()) { // 未登录, 跳转到登录页面
+//                    MyApplication.Instance.getMainActivity().finish()
+                    MyApplication.Instance?.mainActivity?.finish()
+                    startActivity(Intent(myActivity, LoginActivity::class.java))
+                } else { // 已经登录
+                    val intent = if (isAdmin) {
+                        Intent(myActivity, AddFruitActivity::class.java)
+                    } else {
+                        Intent(myActivity, FruitDetailActivity::class.java)
+                    }
+                    intent.putExtra("fruit", fruit)
+                    startActivityForResult(intent, 100)
                 }
-                intent.putExtra("fruit", fruit)
-                startActivityForResult(intent, 100)
             }
-        }
+        })
+
+
         tabTitle!!.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 typeId = state[tab.position]
@@ -143,9 +202,9 @@ class FruitFragment : Fragment() {
     private fun loadData() {
         val content = etQuery!!.text.toString() //获取搜索内容
         mfruit = if ("" == content) {
-            DataSupport.where("typeId = ?", typeId).find(Fruit::class.java)
+            LitePal.where("typeId = ?", typeId).find(Fruit::class.java)
         } else {
-            DataSupport.where("typeId = ? and title like ?", typeId, "%$content%").find(
+            LitePal.where("typeId = ? and title like ?", typeId, "%$content%").find(
                 Fruit::class.java
             ) //通过标题模糊查询留言
         }

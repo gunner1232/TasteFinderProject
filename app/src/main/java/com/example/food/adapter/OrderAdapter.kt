@@ -17,7 +17,8 @@ import com.example.food.bean.Orders
 import com.example.food.bean.User
 import com.example.food.ui.activity.FruitDetailActivity
 import com.example.food.util.SPUtils
-import org.litepal.crud.DataSupport
+import org.litepal.LitePal
+import org.litepal.crud.LitePalSupport
 
 class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: RecyclerView?) :
     RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
@@ -38,7 +39,7 @@ class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: 
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val order = list!![i]
-        val user = DataSupport.where("account = ? ", order.getAccount()).findFirst(
+        val user = LitePal.where("account = ? ", order?.account).findFirst(
             User::class.java
         )
         if (order != null && user != null) {
@@ -47,7 +48,7 @@ class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: 
             viewHolder.date.text = order.date
             viewHolder.itemView.setOnClickListener {
                 val intent = Intent(mActivity, FruitDetailActivity::class.java)
-                val fruit = DataSupport.where("title = ?", order.title).findFirst(
+                val fruit = LitePal.where("title = ?", order.title).findFirst(
                     Fruit::class.java
                 )
                 intent.putExtra("fruit", fruit)

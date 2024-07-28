@@ -15,6 +15,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.food.R
 import com.example.food.bean.Fruit
 import com.example.food.util.SPUtils
+import org.litepal.LitePal
+import org.litepal.crud.LitePalSupport
 
 class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: RecyclerView?) :
     RecyclerView.Adapter<FruitAdapter.ViewHolder>() {
@@ -105,17 +107,5 @@ class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: 
 
     interface ItemListener {
         fun ItemClick(fruit: Fruit?)
-    }
-    private fun deleteFruitMember(fruit: Fruit) {
-        // 将成员设为默认值或 null
-        fruit.name = null // 如果成员允许为 null
-        // 或者 fruit.name = "" // 如果成员不允许为 null，可以设为空字符串
-
-        // 更新数据库中的对象
-        CoroutineScope(Dispatchers.Main).launch {
-            withContext(Dispatchers.IO) {
-                fruit.save()
-            }
-        }
     }
 }

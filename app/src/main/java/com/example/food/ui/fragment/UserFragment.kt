@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import com.example.food.R
+import com.example.food.MyApplication
 import com.example.food.ui.activity.BrowseActivity
 import com.example.food.ui.activity.LoginActivity
 import com.example.food.ui.activity.PasswordActivity
@@ -65,7 +66,7 @@ class UserFragment : Fragment() {
         }
         //退出登录
         btnLogout!!.setOnClickListener {
-            MyApplication.Instance.getMainActivity().finish()
+            MyApplication.Instance?.mainActivity?.finish()
             SPUtils.remove(mActivity, SPUtils.IS_ADMIN)
             SPUtils.remove(mActivity, SPUtils.ACCOUNT)
             startActivity(Intent(mActivity, LoginActivity::class.java))

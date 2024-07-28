@@ -15,7 +15,8 @@ import com.example.food.bean.Browse
 import com.example.food.bean.User
 import com.example.food.ui.activity.UserDetailActivity
 import com.example.food.util.SPUtils
-import org.litepal.crud.DataSupport
+import org.litepal.LitePal
+import org.litepal.crud.LitePalSupport
 
 class UserAdapter(private val llEmpty: LinearLayout?, private val rvUserList: RecyclerView?) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
@@ -47,7 +48,7 @@ class UserAdapter(private val llEmpty: LinearLayout?, private val rvUserList: Re
                 )
                 dialog.setMessage("确认要删除该用户吗")
                 dialog.setPositiveButton("确定") { dialog, which -> //删除收藏记录和浏览记录
-                    val browses = DataSupport.where("account = ?", user.account).find(
+                    val browses = LitePal.where("account = ?", user.account).find(
                         Browse::class.java
                     )
                     if (browses != null && browses.size > 0) {

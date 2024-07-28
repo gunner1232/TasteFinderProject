@@ -18,8 +18,8 @@ class BrowseAdapter(private val llEmpty: LinearLayout?, private val rvNewsList: 
     private val list: MutableList<Browse> = ArrayList()
     private var mActivity: Context? = null
     private var mItemListener: ItemListener? = null
-    fun setItemListener(itemListener: (Any) -> Unit) {
-        this.mItemListener = itemListener
+    fun setItemListener(itemListener: ItemListener) {
+        this.mItemListener = itemListener as ItemListener?
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {

@@ -68,14 +68,23 @@ class BrowseActivity : AppCompatActivity() {
         //=2.3、设置recyclerView的适配器
         rvBrowseList!!.adapter = mBrowseAdapter
         loadData() //加载数据
-        mBrowseAdapter!!.setItemListener { collect ->
-            val intent = Intent(myActivity, FruitDetailActivity::class.java)
-            val news = LitePal.where("title = ?", collect.title).findFirst(
-                Fruit::class.java
-            )
-            intent.putExtra("fruit", news)
-            startActivityForResult(intent, 100)
-        }
+//        mBrowseAdapter!!.setItemListener { browse ->
+//            val intent = Intent(myActivity, FruitDetailActivity::class.java)
+//            val news = LitePal.where("title = ?", browse.account).findFirst(
+//                Fruit::class.java
+//            )
+//            intent.putExtra("fruit", news)
+//            startActivityForResult(intent, 100)
+//        }
+        mBrowseAdapter?.setItemListener(object : BrowseAdapter.ItemListener {
+
+            override fun ItemClick(collect: Browse?) {
+                val intent = Intent(myActivity, FruitDetailActivity::class.java)
+                val fruit = LitePal.where("title = ?", collect?.title).findFirst(Fruit::class.java)
+                intent.putExtra("fruit", fruit)
+                startActivityForResult(intent, 100)
+            }
+        })
     }
 
     /**
