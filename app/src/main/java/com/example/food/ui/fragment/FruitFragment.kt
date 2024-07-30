@@ -51,38 +51,70 @@ class FruitFragment : Fragment() {
         myActivity = context as Activity
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_fruit, container, false)
-        tabTitle = view.findViewById<View>(R.id.tab_title) as TabLayout
-        rvfruitList = view.findViewById<View>(R.id.rv_fruit_list) as RecyclerView
-        llEmpty = view.findViewById(R.id.ll_empty)
-        etQuery = view.findViewById(R.id.et_query)
-        ivSearch = view.findViewById(R.id.iv_search)
-        btnAdd = view.findViewById<View>(R.id.btn_add) as FloatingActionButton
-        //获取控件
-        initView()
-        //软键盘搜索
-        ivSearch?.setOnClickListener(View.OnClickListener {
-            loadData() //加载数据
-        })
-        //点击软键盘中的搜索
-        etQuery?.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                loadData() //加载数据
-                return@OnEditorActionListener true
-            }
-            false
-        })
-        btnAdd!!.setOnClickListener {
-            val intent = Intent(myActivity, AddFruitActivity::class.java)
-            startActivityForResult(intent, 100)
-        }
-        return view
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle
+//    ): View? {
+//        val view = inflater.inflate(R.layout.fragment_fruit, container, false)
+//        tabTitle = view.findViewById<View>(R.id.tab_title) as TabLayout
+//        rvfruitList = view.findViewById<View>(R.id.rv_fruit_list) as RecyclerView
+//        llEmpty = view.findViewById(R.id.ll_empty)
+//        etQuery = view.findViewById(R.id.et_query)
+//        ivSearch = view.findViewById(R.id.iv_search)
+//        btnAdd = view.findViewById<View>(R.id.btn_add) as FloatingActionButton
+//        //获取控件
+//        initView()
+//        //软键盘搜索
+//        ivSearch?.setOnClickListener(View.OnClickListener {
+//            loadData() //加载数据
+//        })
+//        //点击软键盘中的搜索
+//        etQuery?.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                loadData() //加载数据
+//                return@OnEditorActionListener true
+//            }
+//            false
+//        })
+//        btnAdd!!.setOnClickListener {
+//            val intent = Intent(myActivity, AddFruitActivity::class.java)
+//            startActivityForResult(intent, 100)
+//        }
+//        return view
+//    }
+override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+): View? {
+    val view = inflater.inflate(R.layout.fragment_fruit, container, false)
+    tabTitle = view.findViewById<View>(R.id.tab_title) as TabLayout
+    rvfruitList = view.findViewById<View>(R.id.rv_fruit_list) as RecyclerView
+    llEmpty = view.findViewById(R.id.ll_empty)
+    etQuery = view.findViewById(R.id.et_query)
+    ivSearch = view.findViewById(R.id.iv_search)
+    btnAdd = view.findViewById<View>(R.id.btn_add) as FloatingActionButton
+    //获取控件
+    initView()
+    //软键盘搜索
+    ivSearch?.setOnClickListener {
+        loadData() //加载数据
     }
+    //点击软键盘中的搜索
+    etQuery?.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            loadData() //加载数据
+            return@OnEditorActionListener true
+        }
+        false
+    })
+    btnAdd?.setOnClickListener {
+        val intent = Intent(myActivity, AddFruitActivity::class.java)
+        startActivityForResult(intent, 100)
+    }
+    return view
+}
 
     /**
      * 初始化页面
@@ -223,7 +255,7 @@ class FruitFragment : Fragment() {
         loadData()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             loadData() //加载数据
