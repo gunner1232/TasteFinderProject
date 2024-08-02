@@ -41,7 +41,7 @@
                 android:textColor="@drawable/selector_main_rb_text"
                 android:textSize="12dp"
                 android:background="@null"
-                android:text="首页"/>
+                android:text="Home"/>
             <RadioButton
                 android:id="@+id/rb_main_fruit_data"
                 android:layout_weight="1"
@@ -54,7 +54,7 @@
                 android:textColor="@drawable/selector_main_rb_text"
                 android:textSize="12dp"
                 android:background="@null"
-                android:text="订单"/>
+                android:text="Recents"/>
             <RadioButton
                 android:visibility="gone"
                 android:id="@+id/rb_main_setting"
@@ -81,7 +81,7 @@
                 android:textColor="@drawable/selector_main_rb_text"
                 android:textSize="12dp"
                 android:background="@null"
-                android:text="我的"/>
+                android:text="More"/>
         </RadioGroup>
     </LinearLayout>
 </LinearLayout>

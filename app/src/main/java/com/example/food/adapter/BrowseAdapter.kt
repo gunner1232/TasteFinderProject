@@ -11,7 +11,7 @@ import com.example.food.R
 import com.example.food.bean.Browse
 
 /**
- * 浏览记录适配器
+ * Browse history adapter
  */
 class BrowseAdapter(private val llEmpty: LinearLayout?, private val rvNewsList: RecyclerView) :
     RecyclerView.Adapter<BrowseAdapter.ViewHolder>() {
@@ -42,13 +42,13 @@ class BrowseAdapter(private val llEmpty: LinearLayout?, private val rvNewsList: 
     }
 
     fun addItem(listAdd: List<Browse>?) {
-        //如果是加载第一页，需要先清空数据列表
+        //If loading the first page, clear the data list first
         list.clear()
         if (listAdd != null) {
-            //添加数据
+            //add data
             list.addAll(listAdd)
         }
-        //通知RecyclerView进行改变--整体
+        //Notify RecyclerView to make changes - overall
         notifyDataSetChanged()
     }
 

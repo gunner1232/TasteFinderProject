@@ -19,33 +19,33 @@ import com.example.food.widget.ActionBar.ActionBarClickListener
 import org.litepal.LitePal
 
 /**
- * 登录页面
+ * login page
  */
 class LoginActivity : Activity() {
     private var activity: Activity? = null
-    private var mTitleBar: ActionBar? = null //标题栏
-    private var etAccount: EditText? = null //手机号
-    private var etPassword: EditText? = null //密码
-    private var tvRegister: TextView? = null //注册
-    private var btnLogin: Button? = null //登录按钮
-    private var rgType: RadioGroup? = null //用户类型
-    private var rbUser: RadioButton? = null //用户类型
-    private var rbAdmin: RadioButton? = null //用户类型
+    private var mTitleBar: ActionBar? = null //title bar
+    private var etAccount: EditText? = null //account
+    private var etPassword: EditText? = null //password
+    private var tvRegister: TextView? = null //register
+    private var btnLogin: Button? = null //login button
+    private var rgType: RadioGroup? = null //user type
+    private var rbUser: RadioButton? = null //user type
+    private var rbAdmin: RadioButton? = null //user type
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity = this
-        setContentView(R.layout.activity_login) //加载页面
-        etAccount = findViewById<View>(R.id.et_account) as EditText //获取手机号
-        etPassword = findViewById<View>(R.id.et_password) as EditText //获取密码
-        tvRegister = findViewById<View>(R.id.tv_register) as TextView //获取注册
-        btnLogin = findViewById<View>(R.id.btn_login) as Button //获取登录
+        setContentView(R.layout.activity_login) //load pages
+        etAccount = findViewById<View>(R.id.et_account) as EditText //get phone number
+        etPassword = findViewById<View>(R.id.et_password) as EditText //get password
+        tvRegister = findViewById<View>(R.id.tv_register) as TextView //get register
+        btnLogin = findViewById<View>(R.id.btn_login) as Button //get login
         rgType = findViewById(R.id.rg_type)
         rbUser = findViewById(R.id.rb_user)
         rbAdmin = findViewById(R.id.rb_admin)
         mTitleBar = findViewById<View>(R.id.myActionBar) as ActionBar
         mTitleBar!!.setData(
             activity,
-            "登录",
+            "Login",
             0,
             0,
             0,
@@ -59,12 +59,12 @@ class LoginActivity : Activity() {
                 }
             })
 
-        //手机号注册
-        tvRegister!!.setOnClickListener { //跳转到注册页面
+        //Mobile number registration
+        tvRegister!!.setOnClickListener { //Jump to the registration page
             val intent = Intent(activity, RegisterActivity::class.java)
             startActivity(intent)
         }
-        //选择类型
+        //choose type
         rgType?.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
             SPUtils.put(
                 activity,
@@ -72,21 +72,21 @@ class LoginActivity : Activity() {
                 checkedId == R.id.rb_admin
             )
         })
-        //设置点击按钮
-        btnLogin!!.setOnClickListener(View.OnClickListener { v -> //关闭虚拟键盘
+        //Set click button
+        btnLogin!!.setOnClickListener(View.OnClickListener { v -> //Close virtual keyboard
             val inputMethodManager =
                 v.context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(v.windowToken, 0)
-            //获取请求参数
+            //Get request parameters
             val account = etAccount!!.text.toString()
             val password = etPassword!!.text.toString()
             val isAdmit = SPUtils.get(activity, SPUtils.IS_ADMIN, false) as Boolean
-            if ("" == account) { //账号不能为空
-                Toast.makeText(activity, "账号不能为空", Toast.LENGTH_LONG).show()
+            if ("" == account) { //Username cannot be empty
+                Toast.makeText(activity, "Username cannot be empty", Toast.LENGTH_LONG).show()
                 return@OnClickListener
             }
-            if ("" == password) { //密码为空
-                Toast.makeText(activity, "密码为空", Toast.LENGTH_LONG).show()
+            if ("" == password) { //Password is empty
+                Toast.makeText(activity, "Password is empty", Toast.LENGTH_LONG).show()
                 return@OnClickListener
             }
             val user = LitePal.where("account = ?", account).findFirst(
@@ -94,14 +94,14 @@ class LoginActivity : Activity() {
             )
             if (user != null) {
                 if (password != user.password) {
-                    Toast.makeText(activity, "密码错误", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Password error", Toast.LENGTH_SHORT).show()
                 } else {
                     if (isAdmit && "admin" != user.account) {
-                        Toast.makeText(activity, "该账号不是管理员账号", Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity, "This account is not an admin account", Toast.LENGTH_LONG).show()
                         return@OnClickListener
                     }
                     if (!isAdmit && "admin" == user.account) {
-                        Toast.makeText(activity, "该账号不是普通用户账号", Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity, "This account is not a regular user account", Toast.LENGTH_LONG).show()
                         return@OnClickListener
                     }
                     SPUtils.put(this@LoginActivity, "account", account)
@@ -110,7 +110,7 @@ class LoginActivity : Activity() {
                     finish()
                 }
             } else {
-                Toast.makeText(activity, "账号不存在", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Account does not exist", Toast.LENGTH_SHORT).show()
             }
         })
     }

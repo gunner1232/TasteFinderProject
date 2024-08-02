@@ -46,8 +46,8 @@ class UserAdapter(private val llEmpty: LinearLayout?, private val rvUserList: Re
                 val dialog = AlertDialog.Builder(
                     mActivity!!
                 )
-                dialog.setMessage("确认要删除该用户吗")
-                dialog.setPositiveButton("确定") { dialog, which -> //删除收藏记录和浏览记录
+                dialog.setMessage("Want to delete this user?")
+                dialog.setPositiveButton("Yes") { dialog, which -> //删除收藏记录和浏览记录
                     val browses = LitePal.where("account = ?", user.account).find(
                         Browse::class.java
                     )
@@ -59,7 +59,7 @@ class UserAdapter(private val llEmpty: LinearLayout?, private val rvUserList: Re
                     list.remove(user)
                     user.delete()
                     notifyDataSetChanged()
-                    Toast.makeText(mActivity, "删除成功", Toast.LENGTH_LONG).show()
+                    Toast.makeText(mActivity, "Deleted", Toast.LENGTH_LONG).show()
                     if (list != null && list.size > 1) {
                         rvUserList!!.visibility = View.VISIBLE
                         llEmpty!!.visibility = View.GONE
@@ -68,7 +68,7 @@ class UserAdapter(private val llEmpty: LinearLayout?, private val rvUserList: Re
                         llEmpty!!.visibility = View.VISIBLE
                     }
                 }
-                dialog.setNeutralButton("取消") { dialog, which -> dialog.dismiss() }
+                dialog.setNeutralButton("Cancle") { dialog, which -> dialog.dismiss() }
                 dialog.show()
                 false
             }
@@ -76,13 +76,13 @@ class UserAdapter(private val llEmpty: LinearLayout?, private val rvUserList: Re
     }
 
     fun addItem(listAdd: List<User?>?) {
-        //如果是加载第一页，需要先清空数据列表
+        //If loading the first page, clear the data list first
         list!!.clear()
         if (listAdd != null) {
-            //添加数据
+            //add data
             list.addAll(listAdd)
         }
-        //通知RecyclerView进行改变--整体
+        //Notify RecyclerView to make changes - overall
         notifyDataSetChanged()
     }
 

@@ -23,7 +23,7 @@ import org.litepal.LitePal
 import java.util.Collections
 
 /**
- * 用户管理
+ * user management
  */
 class UserManageFragment : Fragment() {
     private var myActivity: Activity? = null
@@ -31,8 +31,8 @@ class UserManageFragment : Fragment() {
     private var rvUserList: RecyclerView? = null
     var mUserAdapter: UserAdapter? = null
     private val btnAdd: FloatingActionButton? = null
-    private var etQuery: EditText? = null //搜索内容
-    private var ivSearch: ImageView? = null //搜索图标
+    private var etQuery: EditText? = null //search content
+    private var ivSearch: ImageView? = null //search icon
     private var mUsers: List<User?>? = null
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,16 +49,16 @@ class UserManageFragment : Fragment() {
         llEmpty = view.findViewById(R.id.ll_empty)
         etQuery = view.findViewById(R.id.et_query)
         ivSearch = view.findViewById(R.id.iv_search)
-        //获取控件
+        //Get Control
         initView()
-        //软键盘搜索
+        //Soft keyboard search
         ivSearch?.setOnClickListener(View.OnClickListener {
-            loadData() //加载数据
+            loadData() //load data
         })
-        //点击软键盘中的搜索
+        //click search in the soft keyboard
         etQuery?.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                loadData() //加载数据
+                loadData() //load data
                 return@OnEditorActionListener true
             }
             false
@@ -68,31 +68,31 @@ class UserManageFragment : Fragment() {
 
     private fun initView() {
         val layoutManager = LinearLayoutManager(myActivity)
-        //=1.2、设置为垂直排列，用setOrientation方法设置(默认为垂直布局)
+        //=1.2. Set to vertical arrangement using the setOrientation method (default is vertical layout)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
-        //=1.3、设置recyclerView的布局管理器
+        //=1.3. Set up the layout manager for recyclerView
         rvUserList!!.layoutManager = layoutManager
-        //==2、实例化适配器
-        //=2.1、初始化适配器
+        //==2、Instantiate adapter
+        //=2.1、Initialize adapter
         mUserAdapter = UserAdapter(llEmpty, rvUserList)
-        //=2.3、设置recyclerView的适配器
+        //=2.3、Set up the adapter for recyclerView
         rvUserList!!.adapter = mUserAdapter
         loadData()
     }
 
     /**
-     * 加载数据
+     * load data
      */
     private fun loadData() {
-        val content = etQuery!!.text.toString() //获取搜索内容
+        val content = etQuery!!.text.toString() //Retrieve search content
         mUsers = if ("" == content) {
             LitePal.where("account != ?", "admin").find(
                 User::class.java
-            ) //查询全部
+            ) //search all
         } else {
             LitePal.where("account like ?", "%$content%").find(
                 User::class.java
-            ) //通过账号模糊查询用户
+            ) //Fuzzy query of users through account
         }
         Collections.reverse(mUsers)
         if (mUsers != null && mUsers!!.size > 0) {

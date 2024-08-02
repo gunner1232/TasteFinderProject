@@ -24,7 +24,7 @@ class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: 
     RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
     private val list: MutableList<Orders?>? = ArrayList()
     private var mActivity: Context? = null
-    private val headerRO = RequestOptions().circleCrop() //圆角变换
+    private val headerRO = RequestOptions().circleCrop() //Round corner transformation
     private var mItemListener: ItemListener? = null
     fun setItemListener(itemListener: ItemListener?) {
         this.mItemListener = itemListener
@@ -43,7 +43,7 @@ class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: 
             User::class.java
         )
         if (order != null && user != null) {
-            viewHolder.nickName.text = String.format("用户：%s", user.nickName)
+            viewHolder.nickName.text = String.format("Nickname：%s", user.nickName)
             viewHolder.number.text = order.number
             viewHolder.date.text = order.date
             viewHolder.itemView.setOnClickListener {
@@ -60,12 +60,12 @@ class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: 
                     val dialog = AlertDialog.Builder(
                         mActivity!!
                     )
-                    dialog.setMessage("确认要删除该订单吗")
-                    dialog.setPositiveButton("确定") { dialog, which ->
+                    dialog.setMessage("Want to delete this order?")
+                    dialog.setPositiveButton("Yes") { dialog, which ->
                         list.remove(order)
                         order.delete()
                         notifyDataSetChanged()
-                        Toast.makeText(mActivity, "删除成功", Toast.LENGTH_LONG).show()
+                        Toast.makeText(mActivity, "Deleted", Toast.LENGTH_LONG).show()
                         if (list != null && list.size > 0) {
                             rvOrderList!!.visibility = View.VISIBLE
                             llEmpty!!.visibility = View.GONE
@@ -74,7 +74,7 @@ class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: 
                             llEmpty!!.visibility = View.VISIBLE
                         }
                     }
-                    dialog.setNeutralButton("取消") { dialog, which -> dialog.dismiss() }
+                    dialog.setNeutralButton("Cancle") { dialog, which -> dialog.dismiss() }
                     dialog.show()
                     false
                 }
@@ -83,13 +83,13 @@ class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: 
     }
 
     fun addItem(listAdd: List<Orders?>?) {
-        //如果是加载第一页，需要先清空数据列表
+        //If loading the first page, clear the data list first
         list!!.clear()
         if (listAdd != null) {
-            //添加数据
+            //add data
             list.addAll(listAdd)
         }
-        //通知RecyclerView进行改变--整体
+        //Notify RecyclerView to make changes - overall
         notifyDataSetChanged()
     }
 

@@ -35,7 +35,7 @@
                 android:scrollHorizontally="true"
                 android:maxLines="1"
                 android:textSize="12dp"
-                android:hint="请输入美食标题"/>
+                android:hint="Enter the food name"/>
             <TextView
                 android:layout_width="1px"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14dp"
-                    android:text="暂无数据"/>
+                    android:text="No data"/>
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_fruit_list"

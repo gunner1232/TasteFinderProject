@@ -19,7 +19,7 @@ import com.example.food.ui.activity.PersonActivity
 import com.example.food.util.SPUtils
 
 /**
- * 个人中心
+ * personal menu
  */
 class UserFragment : Fragment() {
     private var mActivity: Activity? = null
@@ -49,22 +49,22 @@ class UserFragment : Fragment() {
     private fun initView() {
         val isAdmin = SPUtils.get(mActivity, SPUtils.IS_ADMIN, false) as Boolean
         llBrowse!!.visibility = if (isAdmin) View.GONE else View.VISIBLE
-        //个人信息
-        llPerson!!.setOnClickListener { //跳转页面
+        //personal info
+        llPerson!!.setOnClickListener { //Jump page
             val intent = Intent(mActivity, PersonActivity::class.java)
             startActivity(intent)
         }
-        //账号安全
-        llSecurity!!.setOnClickListener { //跳转页面
+        //Account safe
+        llSecurity!!.setOnClickListener { //Jump page
             val intent = Intent(mActivity, PasswordActivity::class.java)
             startActivity(intent)
         }
-        //浏览记录
-        llBrowse!!.setOnClickListener { //跳转页面
+        //Browsing History
+        llBrowse!!.setOnClickListener { //Jump page
             val intent = Intent(mActivity, BrowseActivity::class.java)
             startActivity(intent)
         }
-        //退出登录
+        //logout
         btnLogout!!.setOnClickListener {
             MyApplication.Instance?.mainActivity?.finish()
             SPUtils.remove(mActivity, SPUtils.IS_ADMIN)

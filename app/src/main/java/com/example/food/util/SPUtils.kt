@@ -7,24 +7,25 @@ import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 
 /**
- * 数据持久化工具类
+ * Data persistence tool class
  */
 object SPUtils {
-    const val IF_FIRST: String = "is_first" //是否第一次进来
-    const val IS_ADMIN: String = "is_admin" //是否是管理员
-    const val ACCOUNT: String = "account" //账号
+    const val IF_FIRST: String = "is_first" //first time login or not
+    const val IS_ADMIN: String = "is_admin" //admin or not
+    const val ACCOUNT: String = "account" //account
 
     /**
-     * 保存在手机里面的文件名
+     * The file name saved on the phone
      */
     private const val FILE_NAME = "share_data"
 
     /**
-     * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
+     * To save data, we need to obtain the specific type of data to be saved,
+     * and then call different saving methods based on the type
      *
-     * @param context 上下文
-     * @param key     key值
-     * @param `object`  value值
+     * @param context content
+     * @param key     key
+     * @param `object`  value
      */
     fun put(context: Activity?, key: String?, `object`: Any) {
         val sp = context?.getSharedPreferences(
@@ -51,12 +52,13 @@ object SPUtils {
     }
 
     /**
-     * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
+     * Get the method to save data. We get the specific type of saved data according to the default value,
+     * and then call the corresponding method to get the value
      *
-     * @param context       上下文
-     * @param key           key值
-     * @param defaultObject 默认value值
-     * @return value值
+     * @param context       content
+     * @param key           key
+     * @param defaultObject default value
+     * @return value
      */
     fun get(context: Context?, key: String?, defaultObject: Any?): Any? {
         val sp = context!!.getSharedPreferences(
@@ -80,10 +82,10 @@ object SPUtils {
     }
 
     /**
-     * 移除某个key值已经对应的值
+     * Remove the value that already corresponds to a certain key value
      *
-     * @param context 上下文
-     * @param key     key值
+     * @param context content
+     * @param key     key
      */
     fun remove(context: Context?, key: String?) {
         val sp = context!!.getSharedPreferences(
@@ -96,9 +98,9 @@ object SPUtils {
     }
 
     /**
-     * 清除所有数据
+     * clear all data
      *
-     * @param context 上下文
+     * @param context content
      */
     fun clear(context: Context) {
         val sp = context.getSharedPreferences(
@@ -111,11 +113,11 @@ object SPUtils {
     }
 
     /**
-     * 查询某个key是否已经存在
+     * Check if a key already exists
      *
-     * @param context 上下文
-     * @param key     key值
-     * @return 是否存在
+     * @param context content
+     * @param key     key
+     * @return exist or not
      */
     fun contains(context: Context, key: String?): Boolean {
         val sp = context.getSharedPreferences(
@@ -126,10 +128,10 @@ object SPUtils {
     }
 
     /**
-     * 返回所有的键值对
+     * return all the key values
      *
-     * @param context 上下文
-     * @return 所有的键值对
+     * @param context content
+     * @return all the key values
      */
     fun getAll(context: Context): Map<String, *> {
         val sp = context.getSharedPreferences(
@@ -140,7 +142,7 @@ object SPUtils {
     }
 
     /**
-     * 创建一个解决SharedPreferencesCompat.apply方法的一个兼容类
+     * Create a compatibility class that solves the SharedReferenceCompat.apply method
      *
      * @author zhy
      */
@@ -148,7 +150,7 @@ object SPUtils {
         private val sApplyMethod = findApplyMethod()
 
         /**
-         * 反射查找apply的方法
+         * Reflection based method for finding 'apply'
          *
          * @return Method
          */
@@ -163,7 +165,7 @@ object SPUtils {
         }
 
         /**
-         * 如果找到则使用apply执行，否则使用commit
+         * If found, use apply to execute; otherwise, use commit
          *
          * @param editor SharedPreferences.Edito
          */

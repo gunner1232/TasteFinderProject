@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 /**
- * 开屏页面
+ * Open screen page
  */
 class OpeningActivity : AppCompatActivity() {
     private var myActivity: Activity? = null
@@ -27,7 +27,7 @@ class OpeningActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         myActivity = this
-        //设置页面布局
+        //set the page layout
         setContentView(R.layout.activity_opening)
         try {
             initView()
@@ -40,8 +40,8 @@ class OpeningActivity : AppCompatActivity() {
 
     @Throws(IOException::class, JSONException::class)
     private fun initView() {
-        StatusBarUtil.setStatusBar(myActivity, true) //设置当前界面是否是全屏模式（状态栏）
-        StatusBarUtil.setStatusBarLightMode(myActivity, true) //状态栏文字颜色
+        StatusBarUtil.setStatusBar(myActivity, true) //Set whether the current interface is in full screen mode (status bar)
+        StatusBarUtil.setStatusBarLightMode(myActivity, true) //Status bar text color
         Handler().postDelayed(Runnable {
             if ((intent.flags and Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
                 finish()
@@ -49,13 +49,13 @@ class OpeningActivity : AppCompatActivity() {
             }
             val isFirst = SPUtils.get(myActivity, SPUtils.IF_FIRST, true) as Boolean
             val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
-            if (isFirst) { //第一次进来  初始化本地数据
-                SPUtils.put(myActivity, SPUtils.IF_FIRST, false) //第一次
-                //初始化数据
-                //获取json数据
+            if (isFirst) { //First time entering to initialize local data
+                SPUtils.put(myActivity, SPUtils.IF_FIRST, false)
+                //Initialized Data
+                //Retrieve JSON data
                 var rewardJson: String? = ""
                 var rewardJsonLine: String?
-                //assets文件夹下db.json文件的路径->打开db.json文件
+                //Path to the db.exe file in the assets folder ->Open the dbjson file
                 var bufferedReader: BufferedReader? = null
                 try {
                     bufferedReader =
@@ -65,8 +65,8 @@ class OpeningActivity : AppCompatActivity() {
                         rewardJson += rewardJsonLine
                     }
                     val jsonObject = JSONObject(rewardJson)
-                    val fruitList = jsonObject.getJSONArray("fruit") //获得列表
-                    //把物品列表保存到本地
+                    val fruitList = jsonObject.getJSONArray("fruit") //get list
+                    //Save the item list locally
                     var i = 0
                     val length = fruitList.length()
                     while (i < length) {
@@ -79,16 +79,16 @@ class OpeningActivity : AppCompatActivity() {
                             o.getString("issuer"),
                             sf.format(Date())
                         )
-                        fruit.save() //保存到本地
+                        fruit.save() //save to the local
                         i++
                     }
-                    val user = User("admin", "root", "管理员", 22, "123456789@qq.com")
+                    val user = User("admin", "root", "admin1", 22, "123456789@gmail.com")
                     user.save()
-                    val user2 = User("312", "312", "牢大", 25, "12321216789@qq.com")
+                    val user2 = User("312", "312", "admin2", 25, "12321216789@gmail.com")
                     user2.save()
-                    val user3 = User("313", "313", "祖国人", 27, "142126789@qq.com")
+                    val user3 = User("313", "313", "admin3", 27, "142126789@gmail.com")
                     user3.save()
-                    val user4 = User("314", "314", "baby", 18, "1532556789@qq.com")
+                    val user4 = User("314", "314", "admin4", 18, "1532556789@gmail.com")
                     user4.save()
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -96,7 +96,7 @@ class OpeningActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
             }
-            //两秒后跳转到主页面
+            //Jump to the main page in two seconds
             val intent2 = Intent()
             if ("" == account) {
                 intent2.setClass(this@OpeningActivity, MainActivity::class.java)

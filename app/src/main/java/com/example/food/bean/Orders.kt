@@ -3,10 +3,10 @@ package com.example.food.bean
 import org.litepal.crud.LitePalSupport
 import java.io.Serializable
 
-class Orders(//账号
-    var account: String, //标题
-    var title: String, //编号
-    var number: String, //数量
-    var amount: String, //时间
-    var date: String
+class Orders(
+    var account: String, //account
+    var title: String, // title
+    var number: String, // number
+    var amount: String, // amount
+    var date: String     //data
 ) : LitePalSupport(), Serializable

@@ -4,12 +4,12 @@ import org.litepal.crud.LitePalSupport
 import java.io.Serializable
 
 /**
- * 用户
+ * user
  */
-class User(//账号
-    var account: String, //密码
-    var password: String, //昵称
-    var nickName: String, //年龄
-    var age: Int, //邮箱
-    var email: String
+class User(
+    var account: String, //account
+    var password: String, //password
+    var nickName: String, //nickName
+    var age: Int, //age
+    var email: String //email
 ) : LitePalSupport(), Serializable

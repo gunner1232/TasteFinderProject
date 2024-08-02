@@ -12,11 +12,11 @@ import android.view.WindowManager
 import com.example.food.R
 
 /**
- * 全屏显示 状态栏工具类
+ * Full screen display status bar tool class
  */
 object StatusBarUtil {
     /**
-     * 修改当前 Activity 的显示模式，hideStatusBarBackground :true 全屏模式，false 着色模式
+     * Modify the display mode of the current activity, hideStatsBrBackground: true full screen mode, false shading mode
      *
      * @param activity
      * @param hideStatusBarBackground
@@ -74,7 +74,7 @@ object StatusBarUtil {
     }
 
     /**
-     * 获取手机状态栏高度
+     * Get the height of the phone status bar
      */
     fun getStatusBarHeight(context: Context): Int {
         var result = 0
@@ -86,22 +86,9 @@ object StatusBarUtil {
     }
 
     /**
-     * 设置状态栏颜色
+     * Set the color of the status bar
      */
-    /* public static void setStatusBarColor(Activity activity, int colorId) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = activity.getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(activity.getResources().getColor(colorId));
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //使用SystemBarTint库使4.4版本状态栏变色，需要先将状态栏设置为透明
-            transparentBar(activity);
-            SystemBarTintManager tintManager = new SystemBarTintManager(activity);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(colorId);
-        }
-    }*/
+
     @TargetApi(19)
     fun transparentBar(activity: Activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -121,7 +108,8 @@ object StatusBarUtil {
     }
 
     /**
-     * 设置状态栏文字颜色  true 为黑色  false 为白色（XML跟布局配置  android:fitsSystemWindows="true"，否则布局会上移）
+     * Set the status bar text color to true black and false white (XML and layout configuration Android: fitsSystemWindows="true",
+     * otherwise the layout will move up)
      */
     fun setStatusBarLightMode(activity: Activity?, dark: Boolean) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -144,12 +132,12 @@ object StatusBarUtil {
     }
 
     /**
-     * 设置状态栏图标为深色和魅族特定的文字风格
-     * 可以用来判断是否为Flyme用户
+     * Set the status bar icon to dark color and Meizu specific text style
+     * Can be used to determine if you are a Flyme user
      *
-     * @param window 需要设置的窗口
-     * @param dark   是否把状态栏文字及图标颜色设置为深色
-     * @return boolean 成功执行返回true
+     * @param window Window that needs to be set
+     * @param dark   Should the status bar text and icon colors be set to dark
+     * @return boolean Successful execution returns true
      */
     fun FlymeSetStatusBarLightMode(window: Window?, dark: Boolean): Boolean {
         var result = false
@@ -179,11 +167,11 @@ object StatusBarUtil {
     }
 
     /**
-     * 需要MIUIV6以上
+     * Need MIUIV6 or above
      *
      * @param activity
-     * @param dark     是否把状态栏文字及图标颜色设置为深色
-     * @return boolean 成功执行返回true
+     * @param dark     Should the status bar text and icon colors be set to dark
+     * @return boolean Successful execution returns true
      */
     fun MIUISetStatusBarLightMode(activity: Activity?, dark: Boolean): Boolean {
         var result = false
@@ -201,14 +189,13 @@ object StatusBarUtil {
                     Int::class.javaPrimitiveType
                 )
                 if (dark) {
-                    extraFlagField.invoke(window, darkModeFlag, darkModeFlag) //状态栏透明且黑色字体
+                    extraFlagField.invoke(window, darkModeFlag, darkModeFlag) //The status bar is transparent and in black font
                 } else {
-                    extraFlagField.invoke(window, 0, darkModeFlag) //清除黑色字体
+                    extraFlagField.invoke(window, 0, darkModeFlag) //clear the black font
                 }
                 result = true
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    //开发版 7.7.13 及以后版本采用了系统API，旧方法无效但不会报错，所以两个方式都要加上
                     if (dark) {
                         activity.window.decorView.systemUiVisibility =
                             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

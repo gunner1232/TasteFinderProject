@@ -14,11 +14,11 @@ import com.example.food.widget.ActionBar.ActionBarClickListener
 import org.litepal.LitePal
 
 /**
- * 重置密码
+ * reset password
  */
 class PasswordActivity : AppCompatActivity() {
     private var activity: Activity? = null
-    private var mTitleBar: ActionBar? = null //标题栏
+    private var mTitleBar: ActionBar? = null //title bar
     private var etAccount: EditText? = null
     private var etEmail: EditText? = null
     private var etNewPassword: EditText? = null
@@ -32,7 +32,7 @@ class PasswordActivity : AppCompatActivity() {
         mTitleBar = findViewById<View>(R.id.myActionBar) as ActionBar
         mTitleBar!!.setData(
             activity,
-            "重置密码",
+            "Reset Password",
             R.drawable.ic_back,
             0,
             0,
@@ -47,25 +47,25 @@ class PasswordActivity : AppCompatActivity() {
             })
     }
 
-    //保存信息
+    //save info
     fun save(v: View) {
-        //关闭虚拟键盘
+        //Close virtual keyboard
         val inputMethodManager =
             v.context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(v.windowToken, 0)
         val account = etAccount!!.text.toString()
         val email = etEmail!!.text.toString()
         val newPassword = etNewPassword!!.text.toString()
-        if ("" == account) { //账号不能为空
-            Toast.makeText(activity, "账号不能为空", Toast.LENGTH_LONG).show()
+        if ("" == account) { //Username cannot be empty
+            Toast.makeText(activity, "Username cannot be empty", Toast.LENGTH_LONG).show()
             return
         }
-        if ("" == email) { //邮箱为空
-            Toast.makeText(activity, "邮箱为空", Toast.LENGTH_LONG).show()
+        if ("" == email) { //Email is empty
+            Toast.makeText(activity, "Email is empty", Toast.LENGTH_LONG).show()
             return
         }
-        if ("" == newPassword) { //密码为空
-            Toast.makeText(activity, "新密码为空", Toast.LENGTH_LONG).show()
+        if ("" == newPassword) { //The new password is empty
+            Toast.makeText(activity, "The new password is empty", Toast.LENGTH_LONG).show()
             return
         }
         val user = LitePal.where("account = ? and email = ?", account, email).findFirst(
@@ -74,10 +74,10 @@ class PasswordActivity : AppCompatActivity() {
         if (user != null) {
             user.password = newPassword
             user.save()
-            Toast.makeText(activity, "密码修改成功", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Password changed successfully", Toast.LENGTH_SHORT).show()
             finish()
         } else {
-            Toast.makeText(activity, "账号或者邮箱错误", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Username or email error", Toast.LENGTH_SHORT).show()
         }
     }
 }

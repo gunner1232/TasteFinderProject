@@ -29,20 +29,20 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import org.litepal.LitePal
 
 /**
- * 水果
+ * fruit
  */
 class FruitFragment : Fragment() {
-    private var myActivity: Activity? = null //上下文
+    private var myActivity: Activity? = null //context
     private var tabTitle: TabLayout? = null
     private var rvfruitList: RecyclerView? = null
     private var mfruitAdapter: FruitAdapter? = null
     private var llEmpty: LinearLayout? = null
     private var mIsAdmin: Boolean? = null
-    private var etQuery: EditText? = null //搜索内容
-    private var ivSearch: ImageView? = null //搜索图标
+    private var etQuery: EditText? = null //search content
+    private var ivSearch: ImageView? = null //search icon
     private var btnAdd: FloatingActionButton? = null
     private val state = arrayOf("0", "1", "2", "3", "4", "5")
-    private val title = arrayOf("人气", "主食", "靓汤", "小炒", "炸鸡", "轻食")
+    private val title = arrayOf("Pizza", "Burger", "Sandwich", "Sushi", "Drink")
     private var typeId = "0"
     private var mfruit: List<Fruit>? = null
 
@@ -50,39 +50,7 @@ class FruitFragment : Fragment() {
         super.onAttach(context)
         myActivity = context as Activity
     }
-
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle
-//    ): View? {
-//        val view = inflater.inflate(R.layout.fragment_fruit, container, false)
-//        tabTitle = view.findViewById<View>(R.id.tab_title) as TabLayout
-//        rvfruitList = view.findViewById<View>(R.id.rv_fruit_list) as RecyclerView
-//        llEmpty = view.findViewById(R.id.ll_empty)
-//        etQuery = view.findViewById(R.id.et_query)
-//        ivSearch = view.findViewById(R.id.iv_search)
-//        btnAdd = view.findViewById<View>(R.id.btn_add) as FloatingActionButton
-//        //获取控件
-//        initView()
-//        //软键盘搜索
-//        ivSearch?.setOnClickListener(View.OnClickListener {
-//            loadData() //加载数据
-//        })
-//        //点击软键盘中的搜索
-//        etQuery?.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
-//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                loadData() //加载数据
-//                return@OnEditorActionListener true
-//            }
-//            false
-//        })
-//        btnAdd!!.setOnClickListener {
-//            val intent = Intent(myActivity, AddFruitActivity::class.java)
-//            startActivityForResult(intent, 100)
-//        }
-//        return view
-//    }
+    
 override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -95,16 +63,16 @@ override fun onCreateView(
     etQuery = view.findViewById(R.id.et_query)
     ivSearch = view.findViewById(R.id.iv_search)
     btnAdd = view.findViewById<View>(R.id.btn_add) as FloatingActionButton
-    //获取控件
+    //Get Control
     initView()
-    //软键盘搜索
+    //Soft keyboard search
     ivSearch?.setOnClickListener {
-        loadData() //加载数据
+        loadData() //load data
     }
-    //点击软键盘中的搜索
+    //click the search in the soft keyboard
     etQuery?.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-            loadData() //加载数据
+            loadData() //load data
             return@OnEditorActionListener true
         }
         false
@@ -117,94 +85,39 @@ override fun onCreateView(
 }
 
     /**
-     * 初始化页面
+     * Initialize page
      */
     private fun initView() {
         mIsAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
         btnAdd!!.visibility = if (mIsAdmin!!) View.VISIBLE else View.GONE
         tabTitle!!.tabMode = TabLayout.MODE_SCROLLABLE
 
-        //设置tablayout距离上下左右的距离
-        //tab_title.setPadding(20,20,20,20);
-
-        //为TabLayout添加tab名称
+        //Add tab names to TabLayout
         for (i in title.indices) {
             tabTitle!!.addTab(tabTitle!!.newTab().setText(title[i]))
         }
         val layoutManager = LinearLayoutManager(myActivity)
-        //=1.2、设置为垂直排列，用setOrientation方法设置(默认为垂直布局)
+        //=1.2. Set to vertical arrangement using the setOrientation method (default is vertical layout)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
-        //=1.3、设置recyclerView的布局管理器
+        //=1.3. Set up the layout manager for recyclerView
         rvfruitList!!.layoutManager = layoutManager
-        //==2、实例化适配器
-        //=2.1、初始化适配器
+        //==2. Instantiate adapter
+        //=2.1 Initialize adapter
         mfruitAdapter = FruitAdapter(llEmpty, rvfruitList)
-        //=2.3、设置recyclerView的适配器
+        //=2.3. Setting up the RecyclerView adapter
         rvfruitList!!.adapter = mfruitAdapter
         loadData()
 
-//        mfruitAdapter!!.setItemListener { fruit ->
-//            val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
-//            val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
-//            if ("" == account) { //未登录,跳转到登录页面
-//                MyApplication?.Instance?.mainActivity?.finish()
-//                startActivity(Intent(myActivity, LoginActivity::class.java))
-//            } else {
-//                //已经登录
-//                val intent = if (isAdmin) {
-//                    Intent(myActivity, AddFruitActivity::class.java)
-//                } else {
-//                    Intent(myActivity, FruitDetailActivity::class.java)
-//                }
-//                intent.putExtra("fruit", fruit)
-//                startActivityForResult(intent, 100)
-//            }
-//        }
 
 
         mfruitAdapter!!.setItemListener(object : FruitAdapter.ItemListener {
-//            override fun itemClick(fruit: Fruit) {
-//                val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
-//                val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
-//                if (account.isEmpty()) { // 未登录, 跳转到登录页面
-//                    MyApplication.Instance?.mainActivity?.finish()
-//                    startActivity(Intent(myActivity, LoginActivity::class.java))
-//                } else { // 已经登录
-//                    val intent = if (isAdmin) {
-//                        Intent(myActivity, AddFruitActivity::class.java)
-//                    } else {
-//                        Intent(myActivity, FruitDetailActivity::class.java)
-//                    }
-//                    intent.putExtra("fruit", fruit)
-//                    startActivityForResult(intent, 100)
-//                }
-//            }
-
-//            override fun ItemClick(fruit: Fruit) {
-//                val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
-//                val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
-//                if (account.isEmpty()) { // 未登录, 跳转到登录页面
-////                    MyApplication.Instance.getMainActivity().finish()
-//                    MyApplication.instance.mainActivity?.finish()
-//                    startActivity(Intent(myActivity, LoginActivity::class.java))
-//                } else { // 已经登录
-//                    val intent = if (isAdmin) {
-//                        Intent(myActivity, AddFruitActivity::class.java)
-//                    } else {
-//                        Intent(myActivity, FruitDetailActivity::class.java)
-//                    }
-//                    intent.putExtra("fruit", fruit)
-//                    startActivityForResult(intent, 100)
-//                }
-//            }
-
             override fun ItemClick(fruit: Fruit?) { val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
                 val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
-                if (account.isEmpty()) { // 未登录, 跳转到登录页面
+                if (account.isEmpty()) { // Not logged in, redirected to login page
 //                    MyApplication.Instance.getMainActivity().finish()
                     MyApplication.Instance?.mainActivity?.finish()
                     startActivity(Intent(myActivity, LoginActivity::class.java))
-                } else { // 已经登录
+                } else { // already logged
                     val intent = if (isAdmin) {
                         Intent(myActivity, AddFruitActivity::class.java)
                     } else {
@@ -232,13 +145,13 @@ override fun onCreateView(
     }
 
     private fun loadData() {
-        val content = etQuery!!.text.toString() //获取搜索内容
+        val content = etQuery!!.text.toString() //Retrieve search content
         mfruit = if ("" == content) {
             LitePal.where("typeId = ?", typeId).find(Fruit::class.java)
         } else {
             LitePal.where("typeId = ? and title like ?", typeId, "%$content%").find(
                 Fruit::class.java
-            ) //通过标题模糊查询留言
+            ) //Fuzzy query of comments through title
         }
         if (mfruit != null && mfruit!!.size > 0) {
             rvfruitList!!.visibility = View.VISIBLE
@@ -258,7 +171,7 @@ override fun onCreateView(
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
-            loadData() //加载数据
+            loadData() //load data
         }
     }
 }

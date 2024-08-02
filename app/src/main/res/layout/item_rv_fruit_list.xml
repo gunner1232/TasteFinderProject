@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="标题"
+            android:text="Title"
             android:textSize="24sp"
             android:textColor="@color/colorBlack"
             android:textStyle="bold"/>
@@ -31,14 +31,14 @@
                 android:layout_height="35dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="新京报"
+                android:text="Author"
                 android:textSize="17sp" />
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:text="2021年3月28日12:32:37"/>
+                android:text="Aug 1, 2024, 12:32:37"/>
         </LinearLayout>
     </LinearLayout>
     <ImageView

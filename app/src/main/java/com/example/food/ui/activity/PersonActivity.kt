@@ -15,16 +15,16 @@ import com.example.food.widget.ActionBar.ActionBarClickListener
 import org.litepal.LitePal
 
 /**
- * 个人信息
+ * profile
  */
 class PersonActivity : AppCompatActivity() {
     private var mActivity: Activity? = null
-    private var mTitleBar: ActionBar? = null //标题栏
+    private var mTitleBar: ActionBar? = null //title bar
     private var tvAccount: TextView? = null
     private var etNickName: TextView? = null
     private var etAge: TextView? = null
     private var etEmail: TextView? = null
-    private var btnSave: Button? = null //保存
+    private var btnSave: Button? = null //save
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_person)
@@ -37,7 +37,7 @@ class PersonActivity : AppCompatActivity() {
         mTitleBar = findViewById<View>(R.id.myActionBar) as ActionBar
         mTitleBar!!.setData(
             mActivity,
-            "个人信息",
+            "Profile",
             R.drawable.ic_back,
             0,
             0,
@@ -64,7 +64,7 @@ class PersonActivity : AppCompatActivity() {
             etAge!!.text = user.age.toString()
             etEmail!!.text = user.email
         }
-        //保存
+        //save
         btnSave!!.setOnClickListener(View.OnClickListener {
             val account = tvAccount!!.text.toString()
             val nickName = etNickName!!.text.toString()
@@ -74,31 +74,24 @@ class PersonActivity : AppCompatActivity() {
                 User::class.java
             )
             if ("" == nickName) {
-                Toast.makeText(mActivity, "昵称不能为空", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mActivity, "Nickname cannot be empty", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
             if ("" == age) {
-                Toast.makeText(mActivity, "年龄不能为空", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mActivity, "Age cannot be empty", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
             if ("" == email) {
-                Toast.makeText(mActivity, "邮箱不能为空", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mActivity, "Email cannot be empty", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
             user1.nickName = nickName
             user1.age = age.toInt()
             user1.email = email
             user1.save()
-            Toast.makeText(mActivity, "保存成功", Toast.LENGTH_SHORT).show()
-            finish() //关闭页面
+            Toast.makeText(mActivity, "Saved", Toast.LENGTH_SHORT).show()
+            finish() //close the page
         })
-        /* btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyApplication.Instance.getMainActivity().finish();
-                SPUtils.remove(mActivity,"account");
-                startActivity(new Intent(mActivity, LoginActivity.class));
-            }
-        });*/
+
     }
 }

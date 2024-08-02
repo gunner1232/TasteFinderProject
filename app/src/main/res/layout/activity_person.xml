@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="20dp"
-            android:text="账号："
+            android:text="Username："
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/tv_account"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="20dp"
-            android:text="昵称："
+            android:text="Nickname："
             android:textStyle="bold"/>
         <EditText
             android:id="@+id/tv_nickName"
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="20dp"
-            android:text="年龄："
+            android:text="Age："
             android:textStyle="bold"/>
         <EditText
             android:id="@+id/tv_age"
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="20dp"
-            android:text="邮箱："
+            android:text="Email："
             android:textStyle="bold"/>
         <EditText
             android:id="@+id/tv_email"
@@ -106,7 +106,7 @@
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="保存"
+        android:text="Save"
         android:background="@drawable/btn_border_fill"
         android:textSize="18dp"
         android:textColor="@color/colorWhite"

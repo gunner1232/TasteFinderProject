@@ -26,7 +26,7 @@
             android:scrollHorizontally="true"
             android:maxLines="1"
             android:textSize="12dp"
-            android:hint="请输入用户账号"/>
+            android:hint="Please enter the username"/>
         <TextView
             android:layout_width="1px"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
-                android:text="暂无用户"/>
+                android:text="No account"/>
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"

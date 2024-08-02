@@ -14,10 +14,10 @@ import com.example.food.widget.ActionBar.ActionBarClickListener
 import org.litepal.LitePal
 
 /**
- * 用户明细
+ * User Details
  */
 class UserDetailActivity : AppCompatActivity() {
-    private var mActionBar: ActionBar? = null //标题栏
+    private var mActionBar: ActionBar? = null //title bar
     private var mActivity: Activity? = null
     private var account: TextView? = null
     private var nickName: EditText? = null
@@ -34,10 +34,10 @@ class UserDetailActivity : AppCompatActivity() {
         age = findViewById(R.id.age)
         email = findViewById(R.id.email)
         mActionBar = findViewById(R.id.myActionBar)
-        //侧滑菜单
+        //Side scrolling menu
         mActionBar?.setData(
             mActivity,
-            "员工信息",
+            "Employee Information",
             R.drawable.ic_back,
             0,
             0,
@@ -59,7 +59,7 @@ class UserDetailActivity : AppCompatActivity() {
         }
     }
 
-    //保存
+    //save
     fun save(view: View?) {
         val user = LitePal.where("account = ?", mUser!!.account).findFirst(
             User::class.java
@@ -68,15 +68,15 @@ class UserDetailActivity : AppCompatActivity() {
         val ageStr = age!!.text.toString()
         val emailStr = email!!.text.toString()
         if ("" == nickNameStr) {
-            Toast.makeText(mActivity, "昵称不能为空", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, "Nickname cannot be empty", Toast.LENGTH_SHORT).show()
             return
         }
         if ("" == ageStr) {
-            Toast.makeText(mActivity, "年龄不能为空", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, "Age cannot be empty", Toast.LENGTH_SHORT).show()
             return
         }
         if ("" == emailStr) {
-            Toast.makeText(mActivity, "邮箱不能为空", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, "Email cannot be empty", Toast.LENGTH_SHORT).show()
             return
         }
         if (user != null) {
@@ -84,10 +84,10 @@ class UserDetailActivity : AppCompatActivity() {
             user.age = ageStr.toInt()
             user.email = emailStr
             user.save()
-            Toast.makeText(mActivity, "保存成功", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, "Successfully saved", Toast.LENGTH_SHORT).show()
             finish()
         } else {
-            Toast.makeText(mActivity, "保存失败", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mActivity, "Save failed", Toast.LENGTH_SHORT).show()
         }
     }
 }

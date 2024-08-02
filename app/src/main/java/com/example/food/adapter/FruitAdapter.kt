@@ -58,15 +58,15 @@ class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: 
                     val dialog = AlertDialog.Builder(
                         mActivity!!
                     )
-                    dialog.setMessage("确认要删除该美食吗")
-                    dialog.setPositiveButton("确定") { dialog, which ->
+                    dialog.setMessage("Want to delete this food?")
+                    dialog.setPositiveButton("Yes") { dialog, which ->
                         list.remove(fruit)
 //                        fruit.delete()
                         fruit?.let {
                             it.delete()
                         }
                         notifyDataSetChanged()
-                        Toast.makeText(mActivity, "删除成功", Toast.LENGTH_LONG).show()
+                        Toast.makeText(mActivity, "Deleted", Toast.LENGTH_LONG).show()
                         if (list != null && list.size > 0) {
                             rvfruitList!!.visibility = View.VISIBLE
                             llEmpty!!.visibility = View.GONE
@@ -75,7 +75,7 @@ class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: 
                             llEmpty!!.visibility = View.VISIBLE
                         }
                     }
-                    dialog.setNeutralButton("取消") { dialog, which -> dialog.dismiss() }
+                    dialog.setNeutralButton("Cancle") { dialog, which -> dialog.dismiss() }
                     dialog.show()
                     false
                 }
@@ -88,13 +88,13 @@ class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: 
     }
 
     fun addItem(listAdd: List<Fruit>?) {
-        //如果是加载第一页，需要先清空数据列表
+        //If loading the first page, clear the data list first
         list!!.clear()
         if (listAdd != null) {
-            //添加数据
+            //add data
             list.addAll(listAdd)
         }
-        //通知RecyclerView进行改变--整体
+        //Notify RecyclerView to make changes - overall
         notifyDataSetChanged()
     }
 

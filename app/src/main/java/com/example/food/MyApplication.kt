@@ -10,7 +10,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         Instance = this
-        LitePal.initialize(this) //初始化LitePal数据库
+        LitePal.initialize(this) //Initialize LitePal database
     }
 
     var mainActivity: Activity? = null

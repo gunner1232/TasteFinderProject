@@ -37,11 +37,11 @@
                 android:orientation="horizontal">
                 <!--TextView 文本  html的p标签-->
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="账号"
-                    android:textSize="20dp"
+                    android:text="Username"
+                    android:textSize="16dp"
                     android:textStyle="bold"/>
 
                 <EditText
@@ -50,7 +50,7 @@
                     android:layout_height="33dp"
                     android:layout_weight="2"
                     android:background="@drawable/edit_text_shape"
-                    android:hint="请输入账号"
+                    android:hint="Please enter the username"
                     android:singleLine="true"
                     android:textSize="14dp" />
             </LinearLayout>
@@ -64,11 +64,11 @@
                 android:orientation="horizontal">
                 <!--TextView 文本  html的p标签-->
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="昵称"
-                    android:textSize="20dp"
+                    android:text="Nickname"
+                    android:textSize="16dp"
                     android:textStyle="bold"/>
 
                 <EditText
@@ -79,7 +79,7 @@
                     android:background="@drawable/edit_text_shape"
                     android:textSize="14dp"
                     android:singleLine="true"
-                    android:hint="请输入昵称" />
+                    android:hint="Please enter the nickname" />
             </LinearLayout>
             <!--年龄-->
             <LinearLayout
@@ -91,11 +91,11 @@
                 android:orientation="horizontal">
                 <!--TextView 文本  html的p标签-->
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="年龄"
-                    android:textSize="20dp"
+                    android:text="Age"
+                    android:textSize="16dp"
                     android:textStyle="bold"/>
 
                 <EditText
@@ -107,7 +107,7 @@
                     android:textSize="14dp"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:hint="请输入年龄" />
+                    android:hint="Please enter the age" />
             </LinearLayout>
             <!--邮箱-->
             <LinearLayout
@@ -119,11 +119,11 @@
                 android:orientation="horizontal">
                 <!--TextView 文本  html的p标签-->
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="邮箱"
-                    android:textSize="20dp"
+                    android:text="Email"
+                    android:textSize="16dp"
                     android:textStyle="bold"/>
 
                 <EditText
@@ -135,7 +135,7 @@
                     android:textSize="14dp"
                     android:inputType="textEmailAddress"
                     android:singleLine="true"
-                    android:hint="请输入邮箱" />
+                    android:hint="Please enter the email" />
             </LinearLayout>
             <!--密码-->
             <LinearLayout
@@ -146,11 +146,11 @@
                 android:paddingBottom="15dp"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:textSize="20dp"
-                    android:text="密码"
+                    android:textSize="16dp"
+                    android:text="Password"
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/et_password"
@@ -160,7 +160,7 @@
                     android:background="@drawable/edit_text_shape"
                     android:textSize="14dp"
                     android:singleLine="true"
-                    android:hint="请输入密码"/>
+                    android:hint="Please enter the password"/>
             </LinearLayout>
             <!--确认密码-->
             <LinearLayout
@@ -171,11 +171,11 @@
                 android:paddingBottom="15dp"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:textSize="14dp"
-                    android:text="确认密码"
+                    android:textSize="16dp"
+                    android:text="Confirm"
                     android:textStyle="bold"/>
                 <EditText
                     android:id="@+id/et_password_sure"
@@ -185,7 +185,7 @@
                     android:background="@drawable/edit_text_shape"
                     android:textSize="14dp"
                     android:singleLine="true"
-                    android:hint="请输入密码"/>
+                    android:hint="Please enter the password"/>
             </LinearLayout>
             <TextView
                 android:id="@+id/tv_login"
@@ -194,7 +194,7 @@
                 android:gravity="end"
                 android:layout_marginTop="10dp"
                 android:textSize="16dp"
-                android:text="马上登录"
+                android:text="Login now"
                 android:textColor="@color/colorPrimary"/>
             <!--注册按钮-->
             <Button
@@ -206,7 +206,7 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="22dp"
                 android:textAllCaps="false"
-                android:text="注 册"/>
+                android:text="Register"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

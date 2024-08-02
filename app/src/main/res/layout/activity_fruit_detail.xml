@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_border_fill"
-            android:text="点餐"
+            android:text="Order"
             android:textColor="@color/colorWhite"/>
         <Button
             android:visibility="gone"
@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_border_fill"
-            android:text="取消点餐"
+            android:text="cancellation"
             android:textColor="@color/colorWhite"/>
     </LinearLayout>
 </LinearLayout>

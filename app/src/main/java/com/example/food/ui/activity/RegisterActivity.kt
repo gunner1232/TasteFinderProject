@@ -17,37 +17,37 @@ import org.litepal.LitePal
 import java.text.SimpleDateFormat
 
 /**
- * 注册页面
+ * register page
  */
 class RegisterActivity : Activity() {
     private var activity: Activity? = null
-    private var mTitleBar: ActionBar? = null //标题栏
-    private var etAccount: EditText? = null //手机号
-    private var etNickName: EditText? = null //昵称
-    private var etAge: EditText? = null //年龄
-    private var etEmail: EditText? = null //邮箱
-    private var etPassword: EditText? = null //密码
-    private var etPasswordSure: EditText? = null //确认密码
-    private var tvLogin: TextView? = null //登录
-    private var btnRegister: Button? = null //注册按钮
+    private var mTitleBar: ActionBar? = null //title bar
+    private var etAccount: EditText? = null //account
+    private var etNickName: EditText? = null //nickname
+    private var etAge: EditText? = null //age
+    private var etEmail: EditText? = null //email
+    private var etPassword: EditText? = null //password
+    private var etPasswordSure: EditText? = null //confirm password
+    private var tvLogin: TextView? = null //login
+    private var btnRegister: Button? = null //register button
     private val sf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity = this
-        setContentView(R.layout.activity_register) //加载页面
-        etAccount = findViewById<View>(R.id.et_account) as EditText //获取手机号
-        etNickName = findViewById<View>(R.id.et_nickName) as EditText //获取昵称
-        etAge = findViewById<View>(R.id.et_age) as EditText //获取年龄
-        etEmail = findViewById<View>(R.id.et_email) as EditText //获取邮箱
-        etPassword = findViewById<View>(R.id.et_password) as EditText //获取密码
-        etPasswordSure = findViewById<View>(R.id.et_password_sure) as EditText //获取确认密码
-        tvLogin = findViewById<View>(R.id.tv_login) as TextView //登录
-        btnRegister = findViewById<View>(R.id.btn_register) as Button //获取注册按钮
+        setContentView(R.layout.activity_register) //load page
+        etAccount = findViewById<View>(R.id.et_account) as EditText //get account
+        etNickName = findViewById<View>(R.id.et_nickName) as EditText //get nickname
+        etAge = findViewById<View>(R.id.et_age) as EditText //get age
+        etEmail = findViewById<View>(R.id.et_email) as EditText //get email
+        etPassword = findViewById<View>(R.id.et_password) as EditText //get password
+        etPasswordSure = findViewById<View>(R.id.et_password_sure) as EditText //get confirm password
+        tvLogin = findViewById<View>(R.id.tv_login) as TextView //login
+        btnRegister = findViewById<View>(R.id.btn_register) as Button //get register button
         mTitleBar = findViewById<View>(R.id.myActionBar) as ActionBar
         mTitleBar!!.setData(
             activity,
-            "注册",
+            "Register",
             R.drawable.ic_back,
             0,
             0,
@@ -60,14 +60,14 @@ class RegisterActivity : Activity() {
                 override fun onRightClick() {
                 }
             })
-        tvLogin!!.setOnClickListener { //跳转到登录页面
+        tvLogin!!.setOnClickListener { //jump to the login page
             val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
-        //设置注册点击按钮
+        //Set registration click button
         btnRegister!!.setOnClickListener(View.OnClickListener { v ->
-            //关闭虚拟键盘
+            //Close virtual keyboard
             val inputMethodManager =
                 v.context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(v.windowToken, 0)
@@ -77,28 +77,28 @@ class RegisterActivity : Activity() {
             val email = etEmail!!.text.toString()
             val password = etPassword!!.text.toString()
             val passwordSure = etPasswordSure!!.text.toString()
-            if ("" == account) { //账号不能为空
-                Toast.makeText(activity, "账号不能为空", Toast.LENGTH_LONG).show()
+            if ("" == account) { //Username cannot be empty
+                Toast.makeText(activity, "Username cannot be empty", Toast.LENGTH_LONG).show()
                 return@OnClickListener
             }
-            if ("" == nickName) { //昵称不能为空
-                Toast.makeText(activity, "昵称不能为空", Toast.LENGTH_LONG).show()
+            if ("" == nickName) { //Nickname cannot be empty
+                Toast.makeText(activity, "Nickname cannot be empty", Toast.LENGTH_LONG).show()
                 return@OnClickListener
             }
-            if ("" == age) { //年龄不能为空
-                Toast.makeText(activity, "年龄不能为空", Toast.LENGTH_LONG).show()
+            if ("" == age) { //Age cannot be empty
+                Toast.makeText(activity, "Age cannot be empty", Toast.LENGTH_LONG).show()
                 return@OnClickListener
             }
-            if ("" == email) { //邮箱不能为空
-                Toast.makeText(activity, "邮箱不能为空", Toast.LENGTH_LONG).show()
+            if ("" == email) { //Email cannot be empty
+                Toast.makeText(activity, "Email cannot be empty", Toast.LENGTH_LONG).show()
                 return@OnClickListener
             }
-            if ("" == password) { //密码为空
-                Toast.makeText(activity, "密码为空", Toast.LENGTH_LONG).show()
+            if ("" == password) { //Password is empty
+                Toast.makeText(activity, "Password is empty", Toast.LENGTH_LONG).show()
                 return@OnClickListener
             }
-            if (password != passwordSure) { //密码不一致
-                Toast.makeText(activity, "密码不一致", Toast.LENGTH_LONG).show()
+            if (password != passwordSure) { //Password inconsistency
+                Toast.makeText(activity, "Password inconsistency", Toast.LENGTH_LONG).show()
                 return@OnClickListener
             }
             var user = LitePal.where("account = ?", account).findFirst(
@@ -106,13 +106,13 @@ class RegisterActivity : Activity() {
             )
             if (user == null) {
                 user = User(account, password, nickName, age.toInt(), email)
-                user.save() //保存用户信息
+                user.save() //save user's info
                 val intent = Intent(activity, LoginActivity::class.java)
                 startActivity(intent)
-                Toast.makeText(activity, "注册成功", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Register was successful", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(activity, "该账号已存在", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "This account already exists", Toast.LENGTH_SHORT).show()
             }
         })
     }

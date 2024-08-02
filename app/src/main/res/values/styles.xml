@@ -7,19 +7,19 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <!--弹窗样式-->
+    <!--Pop up style-->
     <style name="dialog" parent="@android:style/Theme.Dialog">
-        <!--边框-->
+        <!--frame-->
         <item name="android:windowFrame">@null</item>
-        <!--是否浮现在activity之上-->
+        <!--Does it appear on top of the activity-->
         <item name="android:windowIsFloating">true</item>
-        <!--半透明-->
+        <!--translucent-->
         <item name="android:windowIsTranslucent">false</item>
-        <!--无标题-->
+        <!--no title-->
         <item name="android:windowNoTitle">true</item>
-        <!--背景透明-->
+        <!--background transparent-->
         <item name="android:windowBackground">@android:color/transparent</item>
-        <!--背景阴影-->
+        <!--background shadow-->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 </resources>

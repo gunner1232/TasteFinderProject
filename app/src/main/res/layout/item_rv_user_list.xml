@@ -17,7 +17,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="20dp"
             android:textSize="18sp"
-            android:text="姓名"/>
+            android:text="Nickname"/>
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"

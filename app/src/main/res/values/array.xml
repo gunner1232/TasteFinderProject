@@ -2,12 +2,12 @@
 <resources>
     <string-array name="type">
 
-        <item >人气</item>
-        <item >主食</item>
-        <item >靓汤</item>
-        <item >小炒</item>
-        <item >炸鸡</item>
-        <item >轻食</item>
+        <item >Pizza</item>
+        <item >Burger</item>
+        <item >Sandwich</item>
+        <item >Sushi</item>
+        <item >Drink</item>
+<!--        <item >轻食</item>-->
 
     </string-array>
 </resources>

@@ -34,7 +34,7 @@
             android:textSize="30dp"
             android:textColor="#496069"
             android:gravity="center"
-            android:text="企业内部饭堂"
+            android:text="TasteFinder"
             android:textStyle="bold"
             />
     </LinearLayout>
@@ -53,6 +53,6 @@
             android:textSize="22dp"
             android:textColor="#496069"
             android:gravity="center"
-            android:text="粒米虽小君莫扔，勤俭节约留美名"/>
+            android:text="Find your favorite food"/>
     </LinearLayout>
 </LinearLayout>

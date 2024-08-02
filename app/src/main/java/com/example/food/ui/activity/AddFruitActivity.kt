@@ -20,17 +20,17 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 /**
- * 添加页面
+ * add pages
  */
 class AddFruitActivity : AppCompatActivity() {
-    private var mActionBar: ActionBar? = null //标题栏
+    private var mActionBar: ActionBar? = null //Title bar
     private var myActivity: Activity? = null
-    private var etTitle: EditText? = null //标题
-    private var etIssuer: EditText? = null //发布单位
-    private var etImg: EditText? = null //图片
-    private var spType: Spinner? = null //类型
-    private var etContent: EditText? = null //内容
-    private var ivImg: ImageView? = null //图片
+    private var etTitle: EditText? = null //Title
+    private var etIssuer: EditText? = null //Publishing unit
+    private var etImg: EditText? = null //Pic
+    private var spType: Spinner? = null //Type
+    private var etContent: EditText? = null //Content
+    private var ivImg: ImageView? = null //Pic
     var sf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     private var mfruit: Fruit? = null
 
@@ -45,11 +45,11 @@ class AddFruitActivity : AppCompatActivity() {
         etContent = findViewById(R.id.content)
         ivImg = findViewById(R.id.iv_img)
         mActionBar = findViewById(R.id.myActionBar)
-        //侧滑菜单
+        //Side scrolling menu
         mActionBar?.let { actionBar ->
             actionBar.setData(
                 myActivity,
-                "编辑美食信息",
+                "Edit food information",
                 R.drawable.ic_back,
                 0,
                 0,
@@ -94,19 +94,19 @@ class AddFruitActivity : AppCompatActivity() {
         val content = etContent!!.text.toString()
         val typeId = spType!!.selectedItemPosition
         if ("" == title) {
-            Toast.makeText(myActivity, "标题不能为空", Toast.LENGTH_LONG).show()
+            Toast.makeText(myActivity, "Title cannot be empty", Toast.LENGTH_LONG).show()
             return
         }
         if ("" == issuer) {
-            Toast.makeText(myActivity, "价格不能为空", Toast.LENGTH_LONG).show()
+            Toast.makeText(myActivity, "Price cannot be empty", Toast.LENGTH_LONG).show()
             return
         }
         if ("" == img) {
-            Toast.makeText(myActivity, "图片地址不能为空", Toast.LENGTH_LONG).show()
+            Toast.makeText(myActivity, "The image address cannot be empty", Toast.LENGTH_LONG).show()
             return
         }
         if ("" == content) {
-            Toast.makeText(myActivity, "描述不能为空", Toast.LENGTH_LONG).show()
+            Toast.makeText(myActivity, "The description cannot be empty", Toast.LENGTH_LONG).show()
             return
         }
         var fruit: Fruit? = null
@@ -127,9 +127,9 @@ class AddFruitActivity : AppCompatActivity() {
 //            fruit!!.()
             setResult(RESULT_OK)
             finish()
-            Toast.makeText(myActivity, "保存成功", Toast.LENGTH_LONG).show()
+            Toast.makeText(myActivity, "Successfully saved", Toast.LENGTH_LONG).show()
         } else {
-            Toast.makeText(myActivity, "该标题已存在", Toast.LENGTH_LONG).show()
+            Toast.makeText(myActivity, "The title already exists", Toast.LENGTH_LONG).show()
         }
     }
 }

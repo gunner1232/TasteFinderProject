@@ -23,16 +23,16 @@ import com.example.food.widget.ActionBar.ActionBarClickListener
  * 主页面
  */
 class MainActivity : Activity() {
-    private var mActionBar: ActionBar? = null //标题栏
+    private var mActionBar: ActionBar? = null //title bar
     private var myActivity: Activity? = null
     private var llContent: LinearLayout? = null
     private var rbFruit: RadioButton? = null
     private var rbFruitData: RadioButton? = null
     private var rbUserManage: RadioButton? = null
     private var rbUser: RadioButton? = null
-    private val fragments = arrayOf<Fragment?>(null, null, null, null) //存放Fragment
-    private var mIsAdmin: Boolean? = null //是否管理员
-    private var mAccount: String? = null //账号
+    private val fragments = arrayOf<Fragment?>(null, null, null, null) //Store Fragment
+    private var mIsAdmin: Boolean? = null //admin or not
+    private var mAccount: String? = null //account
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +46,10 @@ class MainActivity : Activity() {
         rbUserManage = findViewById<View>(R.id.rb_main_setting) as RadioButton
         rbUser = findViewById<View>(R.id.rb_main_user) as RadioButton
         mActionBar = findViewById<View>(R.id.myActionBar) as ActionBar
-        //侧滑菜单
+        //Side scrolling menu
         mActionBar!!.setData(
             myActivity,
-            "点餐",
+            "Order",
             0,
             0,
             0,
@@ -67,28 +67,28 @@ class MainActivity : Activity() {
 
     private fun setViewListener() {
         rbFruit!!.setOnClickListener {
-            mActionBar!!.setTitle("点餐")
+            mActionBar!!.setTitle("Order")
             switchFragment(0)
         }
         rbFruitData!!.setOnClickListener {
-            if ("" == mAccount) { ////未登录,跳转到登录页面
+            if ("" == mAccount) { //Not logged in, redirected to login page
                 MyApplication.Instance?.mainActivity?.finish()
                 startActivity(Intent(myActivity, LoginActivity::class.java))
-            } else { //已经登录
-                mActionBar!!.setTitle("订单")
+            } else { //already login
+                mActionBar!!.setTitle("Recents")
                 switchFragment(1)
             }
         }
         rbUserManage!!.setOnClickListener {
-            mActionBar!!.setTitle("用户管理")
+            mActionBar!!.setTitle("User Management")
             switchFragment(2)
         }
         rbUser!!.setOnClickListener {
-            if ("" == mAccount) { ////未登录,跳转到登录页面
+            if ("" == mAccount) { //Not logged in, redirected to login page
                 MyApplication.Instance?.mainActivity?.finish()
                 startActivity(Intent(myActivity, LoginActivity::class.java))
-            } else { //已经登录
-                mActionBar!!.setTitle("我的")
+            } else { //already login
+                mActionBar!!.setTitle("More")
                 switchFragment(if (mIsAdmin!!) 3 else 2)
             }
         }
@@ -97,41 +97,41 @@ class MainActivity : Activity() {
     private fun initView() {
         mIsAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
         mAccount = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
-        //设置导航栏图标样式
-        val iconNews = resources.getDrawable(R.drawable.selector_main_rb_home) //设置主页图标样式
-        iconNews.setBounds(0, 0, 68, 68) //设置图标边距 大小
-        rbFruit!!.setCompoundDrawables(null, iconNews, null, null) //设置图标位置
-        rbFruit!!.compoundDrawablePadding = 5 //设置文字与图片的间距
-        val iconNewsData = resources.getDrawable(R.drawable.selector_main_rb_buy) //设置主页图标样式
-        iconNewsData.setBounds(0, 0, 68, 68) //设置图标边距 大小
-        rbFruitData!!.setCompoundDrawables(null, iconNewsData, null, null) //设置图标位置
-        rbFruitData!!.compoundDrawablePadding = 5 //设置文字与图片的间距
-        val iconSetting = resources.getDrawable(R.drawable.selector_main_rb_manage) //设置主页图标样式
-        iconSetting.setBounds(0, 0, 60, 60) //设置图标边距 大小
-        rbUserManage!!.setCompoundDrawables(null, iconSetting, null, null) //设置图标位置
-        rbUserManage!!.compoundDrawablePadding = 5 //设置文字与图片的间距
-        val iconUser = resources.getDrawable(R.drawable.selector_main_rb_user) //设置主页图标样式
-        iconUser.setBounds(0, 0, 55, 55) //设置图标边距 大小
-        rbUser!!.setCompoundDrawables(null, iconUser, null, null) //设置图标位置
-        rbUser!!.compoundDrawablePadding = 5 //设置文字与图片的间距
+        //Set navigation bar icon style
+        val iconNews = resources.getDrawable(R.drawable.selector_main_rb_home) //Set homepage icon style
+        iconNews.setBounds(0, 0, 68, 68) //Set icon margin size
+        rbFruit!!.setCompoundDrawables(null, iconNews, null, null) //Set icon location
+        rbFruit!!.compoundDrawablePadding = 5 //Set the spacing between text and images
+        val iconNewsData = resources.getDrawable(R.drawable.selector_main_rb_buy) //Set homepage icon style
+        iconNewsData.setBounds(0, 0, 68, 68) //Set icon margin size
+        rbFruitData!!.setCompoundDrawables(null, iconNewsData, null, null) //Set icon location
+        rbFruitData!!.compoundDrawablePadding = 5 //Set the spacing between text and images
+        val iconSetting = resources.getDrawable(R.drawable.selector_main_rb_manage) //Set homepage icon style
+        iconSetting.setBounds(0, 0, 60, 60) //Set icon margin size
+        rbUserManage!!.setCompoundDrawables(null, iconSetting, null, null) //Set icon location
+        rbUserManage!!.compoundDrawablePadding = 5 //Set the spacing between text and images
+        val iconUser = resources.getDrawable(R.drawable.selector_main_rb_user) //Set homepage icon style
+        iconUser.setBounds(0, 0, 55, 55) //Set icon margin size
+        rbUser!!.setCompoundDrawables(null, iconUser, null, null) //Set icon location
+        rbUser!!.compoundDrawablePadding = 5 //Set the spacing between text and images
         rbUserManage!!.visibility = if (mIsAdmin!!) View.VISIBLE else View.GONE
         switchFragment(0)
         rbFruit!!.isChecked = true
     }
 
     /**
-     * 方法 - 切换Fragment
+     * Method - Switch Fragment
      *
-     * @param fragmentIndex 要显示Fragment的索引
+     * @param fragmentIndex To display the index of the fragment
      */
     private fun switchFragment(fragmentIndex: Int) {
-        //在Activity中显示Fragment
-        //1、获取Fragment管理器 FragmentManager
+        //Display Fragment in Activity
+        //1. Get Fragment Manager Fragment Manager
         val fragmentManager = this.fragmentManager
-        //2、开启fragment事务
+        //2. Activate fragment transaction
         val transaction = fragmentManager.beginTransaction()
 
-        //懒加载 - 如果需要显示的Fragment为null，就new。并添加到Fragment事务中
+        //Lazy loading - if the fragment to be displayed is null, use new. And add it to the Fragment transaction
         if (fragments[fragmentIndex] == null) {
             if (mIsAdmin!!) {
                 when (fragmentIndex) {
@@ -148,27 +148,27 @@ class MainActivity : Activity() {
                 }
             }
 
-            //==添加Fragment对象到Fragment事务中
-            //参数：显示Fragment的容器的ID，Fragment对象
+            //==Add Fragment Object to Fragment Transaction
+            //Parameters: Display the ID of the container for the Fragment, Fragment object
             transaction.add(R.id.ll_main_content, fragments[fragmentIndex])
         }
 
-        //隐藏其他的Fragment
+        //Hide other fragments
         for (i in fragments.indices) {
             if (fragmentIndex != i && fragments[i] != null) {
-                //隐藏指定的Fragment
+                //Hide the specified fragment
                 transaction.hide(fragments[i])
             }
         }
-        //4、显示Fragment
+        //4. Display Fragment
         transaction.show(fragments[fragmentIndex])
 
-        //5、提交事务
+        //5. Submit transaction
         transaction.commit()
     }
 
     /**
-     * 双击退出
+     * Double click to exit
      *
      * @param keyCode
      * @param event
@@ -187,7 +187,7 @@ class MainActivity : Activity() {
     fun exit() {
         if (System.currentTimeMillis() - time > 2000) {
             time = System.currentTimeMillis()
-            Toast.makeText(myActivity, "再点击一次退出应用程序", Toast.LENGTH_LONG).show()
+            Toast.makeText(myActivity, "Click again to exit the app", Toast.LENGTH_LONG).show()
         } else {
             finish()
         }

@@ -20,11 +20,11 @@ import org.litepal.LitePal
 //import org.litepal.crud.DataSupport
 
 /**
- * 浏览记录
+ * Browsing History
  */
 class BrowseActivity : AppCompatActivity() {
     private var myActivity: Activity? = null
-    private var mTitleBar: ActionBar? = null //标题栏
+    private var mTitleBar: ActionBar? = null //Title bar
     private var llEmpty: LinearLayout? = null
     private var rvBrowseList: RecyclerView? = null
     private var mBrowseAdapter: BrowseAdapter? = null
@@ -39,7 +39,7 @@ class BrowseActivity : AppCompatActivity() {
         mTitleBar = findViewById<View>(R.id.myActionBar) as ActionBar
         mTitleBar!!.setData(
             myActivity,
-            "浏览记录",
+            "Browsing History",
             R.drawable.ic_back,
             0,
             0,
@@ -58,24 +58,17 @@ class BrowseActivity : AppCompatActivity() {
     private fun initView() {
         account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
         val layoutManager = LinearLayoutManager(myActivity)
-        //=1.2、设置为垂直排列，用setOrientation方法设置(默认为垂直布局)
+        //=1.2、Set to vertical arrangement，Set with setOrientation method (default is vertical layout)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
-        //=1.3、设置recyclerView的布局管理器
+        //=1.3、Set up a layout manager for recyclerView
         rvBrowseList!!.layoutManager = layoutManager
-        //==2、实例化适配器
-        //=2.1、初始化适配器
+        //==2、Instantiate adapter
+        //=2.1、Initialize adapter
         mBrowseAdapter = BrowseAdapter(llEmpty, rvBrowseList!!)
-        //=2.3、设置recyclerView的适配器
+        //=2.3、Set up the adapter for recyclerView
         rvBrowseList!!.adapter = mBrowseAdapter
-        loadData() //加载数据
-//        mBrowseAdapter!!.setItemListener { browse ->
-//            val intent = Intent(myActivity, FruitDetailActivity::class.java)
-//            val news = LitePal.where("title = ?", browse.account).findFirst(
-//                Fruit::class.java
-//            )
-//            intent.putExtra("fruit", news)
-//            startActivityForResult(intent, 100)
-//        }
+        loadData() //load data
+
         mBrowseAdapter?.setItemListener(object : BrowseAdapter.ItemListener {
 
             override fun ItemClick(collect: Browse?) {
@@ -88,10 +81,10 @@ class BrowseActivity : AppCompatActivity() {
     }
 
     /**
-     * 加载数据
+     * load data
      */
     private fun loadData() {
-        mBrowses = LitePal.where("account = ?", account).find(Browse::class.java) //查询浏览记录
+        mBrowses = LitePal.where("account = ?", account).find(Browse::class.java) //Search browsing history
         if (mBrowses != null && mBrowses!!.size > 0) {
             rvBrowseList!!.visibility = View.VISIBLE
             llEmpty!!.visibility = View.GONE

@@ -3,9 +3,9 @@ package com.example.food.bean
 import org.litepal.crud.LitePalSupport
 
 /**
- * 浏览记录
+ * browse history
  */
-class Browse(//账号
-    var account: String, //菜品标题
+class Browse(//username
+    var account: String, //name of the food
     var title: String
 ) : LitePalSupport()
