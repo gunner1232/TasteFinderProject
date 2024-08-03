@@ -15,25 +15,25 @@ import com.example.food.R
 
 
 /**
- * 自定义ActionBar
+ * customizable ActionBar
  */
 class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
     LinearLayout(context, attrs) {
-    private var llActionbarRoot: LinearLayout? = null //自定义ActionBar根节点
-    private var vStatusBar: View? = null //状态栏位置
-    private var ivLeft: ImageView? = null //左边图标
-    private var tvLeft: TextView? = null //左边
-    private var tvTitle: TextView? = null //中间标题
-    private var ivRight: ImageView? = null //右边图标
-    private var btnRight: Button? = null //右边按钮
-    private var tvRight: TextView? = null //右边文字
+    private var llActionbarRoot: LinearLayout? = null //Customize ActionBar root node
+    private var vStatusBar: View? = null //Status bar position
+    private var ivLeft: ImageView? = null //Left icon
+    private var tvLeft: TextView? = null //Left
+    private var tvTitle: TextView? = null //Middle title
+    private var ivRight: ImageView? = null //Right icon
+    private var btnRight: Button? = null //Right button
+    private var tvRight: TextView? = null //right-hand text
 
     init {
         init(context)
     }
 
     /**
-     * 设置标题
+     * Setting the title
      * @param title
      */
     fun setTitle(title: String?) {
@@ -45,7 +45,7 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     /**
-     * 设置左侧文本
+     * Setting the left side text
      * @param text
      */
     fun setLeftText(text: String?) {
@@ -58,7 +58,7 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     /**
-     * 设置左侧图标
+     * Setting the left icon
      * @param ico
      */
     fun setLeftIco(ico: Int) {
@@ -72,7 +72,7 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
 
     /**
-     * 设置右侧文本
+     * Setting the right side text
      * @param text
      */
     fun setRightText(text: String?) {
@@ -85,7 +85,7 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     /**
-     * 设置右侧btn
+     * Set the right button
      * @param text
      */
     fun setRightBtn(text: String?) {
@@ -98,7 +98,7 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     /**
-     * 设置右侧图标
+     * Setting the right icon
      * @param ico
      */
     fun setRightIco(ico: Int) {
@@ -111,9 +111,9 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     private fun init(context: Context) {
-        orientation = HORIZONTAL //设置横向布局
+        orientation = HORIZONTAL //Setting the horizontal layout
         val contentView = inflate(getContext(), R.layout.widget_actionbar, this)
-        //获取控件
+        //Getting Controls
         llActionbarRoot = contentView.findViewById<View>(R.id.ll_actionbar_root) as LinearLayout
         vStatusBar = contentView.findViewById(R.id.v_statusbar)
         ivLeft = contentView.findViewById<View>(R.id.iv_actionbar_left) as ImageView
@@ -125,12 +125,12 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     /**
-     * 设置透明度
+     * Setting transparency
      *
-     * @param transAlpha{Integer} 0-255 之间
+     * @param transAlpha{Integer} between 0-255
      */
     fun setTranslucent(transAlpha: Int) {
-        //设置透明度
+        //Setting transparency
         llActionbarRoot!!.setBackgroundColor(
             ColorUtils.setAlphaComponent(
                 resources.getColor(R.color.colorPrimary),
@@ -143,14 +143,14 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     /**
-     * 设置数据
+     * Setup Data
      *
-     * @param strTitle   标题
-     * @param resIdLeft  左边图标资源
-     * @param resIdRight 右边图标资源
-     * @param intColor   内容颜色 0为白色 1为黑色
-     * @param backgroundColor   背景颜色
-     * @param listener   点击事件监听
+     * @param strTitle   Title
+     * @param resIdLeft  Left Icon Resources
+     * @param resIdRight Right Icon Resources
+     * @param intColor   Content color 0 is white 1 is black
+     * @param backgroundColor   background color
+     * @param listener   Click event listener
      */
     fun setData(
         strTitle: String?,
@@ -183,7 +183,7 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         if (backgroundColor == 0) {
             llActionbarRoot!!.setBackgroundResource(0)
         } else {
-            llActionbarRoot!!.setBackgroundColor(backgroundColor) //设置标题栏背景颜色
+            llActionbarRoot!!.setBackgroundColor(backgroundColor) //Setting the background color of the title bar
         }
         if (listener != null) {
             ivLeft!!.setOnClickListener { listener.onLeftClick() }
@@ -223,7 +223,7 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         if (backgroundColor == 0) {
             llActionbarRoot!!.setBackgroundResource(0)
         } else {
-            llActionbarRoot!!.setBackgroundColor(backgroundColor) //设置标题栏背景颜色
+            llActionbarRoot!!.setBackgroundColor(backgroundColor) //Setting the background color of the title bar
         }
         if (listener != null) {
             ivLeft!!.setOnClickListener { listener.onLeftClick() }
@@ -261,7 +261,7 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         if (backgroundColor == 0) {
             llActionbarRoot!!.setBackgroundResource(0)
         } else {
-            llActionbarRoot!!.setBackgroundColor(backgroundColor) //设置标题栏背景颜色
+            llActionbarRoot!!.setBackgroundColor(backgroundColor) //Setting the background color of the title bar
         }
         if (listener != null) {
             if (ivLeft!!.visibility == VISIBLE) {
@@ -280,10 +280,10 @@ class ActionBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     interface ActionBarClickListener {
-        //左边点击
+        //Left click
         fun onLeftClick()
 
-        //右边点击
+        //Right click
         fun onRightClick()
     }
 }

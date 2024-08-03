@@ -71,7 +71,7 @@ class FruitDetailActivity : AppCompatActivity() {
             tvTitle.text = fruit.title
             tvDate.text = fruit.date
             tvContent.text = fruit.content
-            tvIssuer.text = String.format("￥ %s", fruit.issuer)
+            tvIssuer.text = String.format("$ %s", fruit.issuer)
 
             Glide.with(this)
                 .asBitmap()

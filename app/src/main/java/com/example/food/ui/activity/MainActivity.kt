@@ -20,7 +20,7 @@ import com.example.food.widget.ActionBar
 import com.example.food.widget.ActionBar.ActionBarClickListener
 
 /**
- * 主页面
+ * main page
  */
 class MainActivity : Activity() {
     private var mActionBar: ActionBar? = null //title bar
@@ -114,7 +114,7 @@ class MainActivity : Activity() {
         iconUser.setBounds(0, 0, 55, 55) //Set icon margin size
         rbUser!!.setCompoundDrawables(null, iconUser, null, null) //Set icon location
         rbUser!!.compoundDrawablePadding = 5 //Set the spacing between text and images
-        rbUserManage!!.visibility = if (mIsAdmin!!) View.VISIBLE else View.GONE
+//        rbUserManage!!.visibility = if (mIsAdmin!!) View.VISIBLE else View.GONE
         switchFragment(0)
         rbFruit!!.isChecked = true
     }

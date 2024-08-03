@@ -38,7 +38,7 @@ class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: 
         val fruit = list!![i]
         if (fruit != null) {
             viewHolder.title.text = fruit.title
-            viewHolder.author_name.text = String.format("￥ %s", fruit.issuer)
+            viewHolder.author_name.text = String.format("$ %s", fruit.issuer)
             viewHolder.date.text = fruit.date
             Glide.with(mActivity!!)
                 .asBitmap()
@@ -75,7 +75,7 @@ class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: 
                             llEmpty!!.visibility = View.VISIBLE
                         }
                     }
-                    dialog.setNeutralButton("Cancle") { dialog, which -> dialog.dismiss() }
+                    dialog.setNeutralButton("Cancel") { dialog, which -> dialog.dismiss() }
                     dialog.show()
                     false
                 }

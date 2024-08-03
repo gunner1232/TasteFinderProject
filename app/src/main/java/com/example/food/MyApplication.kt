@@ -2,7 +2,6 @@ package com.example.food
 
 import android.app.Activity
 import android.app.Application
-//import org.litepal.LitePal
 import org.litepal.LitePal
 
 

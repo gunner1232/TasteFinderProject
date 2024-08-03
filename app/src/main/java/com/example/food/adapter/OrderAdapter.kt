@@ -74,7 +74,7 @@ class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: 
                             llEmpty!!.visibility = View.VISIBLE
                         }
                     }
-                    dialog.setNeutralButton("Cancle") { dialog, which -> dialog.dismiss() }
+                    dialog.setNeutralButton("Cancel") { dialog, which -> dialog.dismiss() }
                     dialog.show()
                     false
                 }

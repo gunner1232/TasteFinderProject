@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
-    <!--按钮边框-->
-    <!--solid用以指定内部填充色-->
+    <!--Button Borders-->
+    <!--solid is used to specify the internal fill color-->
     <solid android:color="@color/colorPrimary" />
-    <!--渐变色-->
+    <!--fade color-->
     <gradient
         android:angle="0"
         android:startColor="@color/colorPrimary"

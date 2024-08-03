@@ -68,7 +68,7 @@ class UserAdapter(private val llEmpty: LinearLayout?, private val rvUserList: Re
                         llEmpty!!.visibility = View.VISIBLE
                     }
                 }
-                dialog.setNeutralButton("Cancle") { dialog, which -> dialog.dismiss() }
+                dialog.setNeutralButton("Cancel") { dialog, which -> dialog.dismiss() }
                 dialog.show()
                 false
             }
