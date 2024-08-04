@@ -3,8 +3,16 @@
     >
 
 <!--    <solid android:color="#0ebeff"/>-->
-    <stroke android:color="#a4b7ad" android:width="3dp"/>
-    <corners android:radius="5dp"/>
-    <gradient android:startColor="#0fffef"
-        android:endColor="#ad7514"/>
+<!--    <stroke android:color="#a4b7ad" android:width="3dp"/>-->
+<!--    <corners android:radius="5dp"/>-->
+<!--    <gradient android:startColor="#0fffef"-->
+<!--        android:endColor="#ad7514"/>-->
+    <solid android:color="@color/colorPrimary" />
+    <!--fade color-->
+    <gradient
+        android:angle="0"
+        android:startColor="@color/colorPrimary"
+        android:endColor="#bd8eb0"/>
+    <corners
+        android:radius="10dp"/>
 </shape>

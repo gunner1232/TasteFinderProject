@@ -11,7 +11,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import com.example.food.R
 import com.example.food.MyApplication
-import com.example.food.ui.fragment.FruitFragment
+import com.example.food.ui.fragment.FoodFragment
 import com.example.food.ui.fragment.OrderFragment
 import com.example.food.ui.fragment.UserFragment
 import com.example.food.ui.fragment.UserManageFragment
@@ -135,14 +135,14 @@ class MainActivity : Activity() {
         if (fragments[fragmentIndex] == null) {
             if (mIsAdmin!!) {
                 when (fragmentIndex) {
-                    0 -> fragments[fragmentIndex] = FruitFragment()
+                    0 -> fragments[fragmentIndex] = FoodFragment()
                     1 -> fragments[fragmentIndex] = OrderFragment()
                     2 -> fragments[fragmentIndex] = UserManageFragment()
                     3 -> fragments[fragmentIndex] = UserFragment()
                 }
             } else {
                 when (fragmentIndex) {
-                    0 -> fragments[fragmentIndex] = FruitFragment()
+                    0 -> fragments[fragmentIndex] = FoodFragment()
                     1 -> fragments[fragmentIndex] = OrderFragment()
                     2 -> fragments[fragmentIndex] = UserFragment()
                 }

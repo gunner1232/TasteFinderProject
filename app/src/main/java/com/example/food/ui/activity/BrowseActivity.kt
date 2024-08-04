@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.food.R
 import com.example.food.adapter.BrowseAdapter
 import com.example.food.bean.Browse
-import com.example.food.bean.Fruit
+import com.example.food.bean.Food
 import com.example.food.util.SPUtils
 import com.example.food.widget.ActionBar
 import com.example.food.widget.ActionBar.ActionBarClickListener
@@ -72,9 +72,9 @@ class BrowseActivity : AppCompatActivity() {
         mBrowseAdapter?.setItemListener(object : BrowseAdapter.ItemListener {
 
             override fun ItemClick(collect: Browse?) {
-                val intent = Intent(myActivity, FruitDetailActivity::class.java)
-                val fruit = LitePal.where("title = ?", collect?.title).findFirst(Fruit::class.java)
-                intent.putExtra("fruit", fruit)
+                val intent = Intent(myActivity, FoodDetailActivity::class.java)
+                val food = LitePal.where("title = ?", collect?.title).findFirst(Food::class.java)
+                intent.putExtra("fruit", food)
                 startActivityForResult(intent, 100)
             }
         })

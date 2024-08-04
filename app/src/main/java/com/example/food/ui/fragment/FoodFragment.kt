@@ -17,10 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.food.R
 import com.example.food.MyApplication
-import com.example.food.adapter.FruitAdapter
-import com.example.food.bean.Fruit
-import com.example.food.ui.activity.AddFruitActivity
-import com.example.food.ui.activity.FruitDetailActivity
+import com.example.food.adapter.FoodAdapter
+import com.example.food.bean.Food
+import com.example.food.ui.activity.FoodDetailActivity
 import com.example.food.ui.activity.LoginActivity
 import com.example.food.util.SPUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,11 +30,11 @@ import org.litepal.LitePal
 /**
  * fruit
  */
-class FruitFragment : Fragment() {
+class FoodFragment : Fragment() {
     private var myActivity: Activity? = null //context
     private var tabTitle: TabLayout? = null
     private var rvfruitList: RecyclerView? = null
-    private var mfruitAdapter: FruitAdapter? = null
+    private var mfruitAdapter: FoodAdapter? = null
     private var llEmpty: LinearLayout? = null
     private var mIsAdmin: Boolean? = null
     private var etQuery: EditText? = null //search content
@@ -44,7 +43,7 @@ class FruitFragment : Fragment() {
     private val state = arrayOf("0", "1", "2", "3", "4", "5")
     private val title = arrayOf("Pizza", "Burger", "Sandwich", "Sushi", "Drink")
     private var typeId = "0"
-    private var mfruit: List<Fruit>? = null
+    private var mfruit: List<Food>? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -56,14 +55,14 @@ override fun onCreateView(
     container: ViewGroup?,
     savedInstanceState: Bundle?
 ): View? {
-    val view = inflater.inflate(R.layout.fragment_fruit, container, false)
+    val view = inflater.inflate(R.layout.fragment_food, container, false)
     tabTitle = view.findViewById<View>(R.id.tab_title) as TabLayout
     rvfruitList = view.findViewById<View>(R.id.rv_fruit_list) as RecyclerView
     llEmpty = view.findViewById(R.id.ll_empty)
     etQuery = view.findViewById(R.id.et_query)
     ivSearch = view.findViewById(R.id.iv_search)
 
-    btnAdd = view.findViewById<View>(R.id.btn_add) as FloatingActionButton
+//    btnAdd = view.findViewById<View>(R.id.btn_add) as FloatingActionButton
 
 
 
@@ -82,10 +81,10 @@ override fun onCreateView(
         }
         false
     })
-    btnAdd?.setOnClickListener {
-        val intent = Intent(myActivity, AddFruitActivity::class.java)
-        startActivityForResult(intent, 100)
-    }
+//    btnAdd?.setOnClickListener {
+//        val intent = Intent(myActivity, AddFruitActivity::class.java)
+//        startActivityForResult(intent, 100)
+//    }
     return view
 }
 
@@ -96,7 +95,7 @@ override fun onCreateView(
         mIsAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
 //        btnAdd!!.visibility = if (mIsAdmin!!) View.VISIBLE else View.GONE
 
-        btnAdd!!.visibility =  View.GONE
+//        btnAdd!!.visibility =  View.GONE
         tabTitle!!.tabMode = TabLayout.MODE_SCROLLABLE
 
         //Add tab names to TabLayout
@@ -110,27 +109,28 @@ override fun onCreateView(
         rvfruitList!!.layoutManager = layoutManager
         //==2. Instantiate adapter
         //=2.1 Initialize adapter
-        mfruitAdapter = FruitAdapter(llEmpty, rvfruitList)
+        mfruitAdapter = FoodAdapter(llEmpty, rvfruitList)
         //=2.3. Setting up the RecyclerView adapter
         rvfruitList!!.adapter = mfruitAdapter
         loadData()
 
 
 
-        mfruitAdapter!!.setItemListener(object : FruitAdapter.ItemListener {
-            override fun ItemClick(fruit: Fruit?) { val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
+        mfruitAdapter!!.setItemListener(object : FoodAdapter.ItemListener {
+            override fun ItemClick(food: Food?) { val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
                 val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
                 if (account.isEmpty()) { // Not logged in, redirected to login page
 //                    MyApplication.Instance.getMainActivity().finish()
                     MyApplication.Instance?.mainActivity?.finish()
                     startActivity(Intent(myActivity, LoginActivity::class.java))
                 } else { // already logged
-                    val intent = if (isAdmin) {
-                        Intent(myActivity, AddFruitActivity::class.java)
-                    } else {
-                        Intent(myActivity, FruitDetailActivity::class.java)
-                    }
-                    intent.putExtra("fruit", fruit)
+                    val intent =
+//                        if (isAdmin) {
+//                        Intent(myActivity, AddFruitActivity::class.java)
+//                    } else {
+                        Intent(myActivity, FoodDetailActivity::class.java)
+//                    }
+                    intent.putExtra("fruit", food)
                     startActivityForResult(intent, 100)
                 }
             }
@@ -154,10 +154,10 @@ override fun onCreateView(
     private fun loadData() {
         val content = etQuery!!.text.toString() //Retrieve search content
         mfruit = if ("" == content) {
-            LitePal.where("typeId = ?", typeId).find(Fruit::class.java)
+            LitePal.where("typeId = ?", typeId).find(Food::class.java)
         } else {
             LitePal.where("typeId = ? and title like ?", typeId, "%$content%").find(
-                Fruit::class.java
+                Food::class.java
             ) //Fuzzy query of comments through title
         }
         if (mfruit != null && mfruit!!.size > 0) {

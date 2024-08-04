@@ -1,6 +1,5 @@
 package com.example.food.ui.activity
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -12,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.food.R
 import com.example.food.bean.Browse
-import com.example.food.bean.Fruit
+import com.example.food.bean.Food
 import com.example.food.bean.Orders
 import com.example.food.util.SPUtils
 import com.example.food.widget.ActionBar
@@ -26,7 +25,7 @@ import org.litepal.LitePal
 /**
  * Detailed information of dishes
  */
-class FruitDetailActivity : AppCompatActivity() {
+class FoodDetailActivity : AppCompatActivity() {
     private lateinit var ivImg: ImageView
     private lateinit var tvTitle: TextView
     private lateinit var tvDate: TextView
@@ -66,36 +65,36 @@ class FruitDetailActivity : AppCompatActivity() {
                 }
             })
 
-        val fruit = intent.getSerializableExtra("fruit") as? Fruit
-        if (fruit != null) {
-            tvTitle.text = fruit.title
-            tvDate.text = fruit.date
-            tvContent.text = fruit.content
-            tvIssuer.text = String.format("$ %s", fruit.issuer)
+        val food = intent.getSerializableExtra("fruit") as? Food
+        if (food != null) {
+            tvTitle.text = food.title
+            tvDate.text = food.date
+            tvContent.text = food.content
+            tvIssuer.text = String.format("$ %s", food.issuer)
 
             Glide.with(this)
                 .asBitmap()
                 .skipMemoryCache(true)
-                .load(fruit.img)
+                .load(food.img)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(ivImg)
 
             val account = SPUtils.get(this, SPUtils.ACCOUNT, "") as String
-            val browse = LitePal.where("account = ? and title = ?", account, fruit.title).findFirst(Browse::class.java)
+            val browse = LitePal.where("account = ? and title = ?", account, food.title).findFirst(Browse::class.java)
             if (browse == null) {
-                val browse1 = Browse(account, fruit.title)
+                val browse1 = Browse(account, food.title)
                 browse1.save()
             }
 
             val isAdmin = SPUtils.get(this, SPUtils.IS_ADMIN, false) as Boolean
             if (!isAdmin) {
-                val order = LitePal.where("account = ? and title = ?", account, fruit.title).findFirst(Orders::class.java)
+                val order = LitePal.where("account = ? and title = ?", account, food.title).findFirst(Orders::class.java)
                 btnCollect.visibility = if (order != null) View.GONE else View.VISIBLE
                 btnCancel.visibility = if (order != null) View.VISIBLE else View.GONE
             }
 
             btnCollect.setOnClickListener {
-                val order = Orders(account, fruit.title, "S" + System.currentTimeMillis(), account, sf.format(Date()))
+                val order = Orders(account, food.title, "S" + System.currentTimeMillis(), account, sf.format(Date()))
                 order.save()
                 Toast.makeText(this, "Ordered", Toast.LENGTH_SHORT).show()
                 btnCollect.visibility = View.GONE
@@ -103,7 +102,7 @@ class FruitDetailActivity : AppCompatActivity() {
             }
 
             btnCancel.setOnClickListener {
-                val order = LitePal.where("account = ? and title = ?", account, fruit.title).findFirst(Orders::class.java)
+                val order = LitePal.where("account = ? and title = ?", account, food.title).findFirst(Orders::class.java)
                 order?.delete()
                 Toast.makeText(this, "canceled", Toast.LENGTH_SHORT).show()
                 btnCollect.visibility = View.VISIBLE

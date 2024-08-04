@@ -24,7 +24,7 @@
         <activity android:name=".ui.activity.LoginActivity"/>
         <activity android:name=".ui.activity.RegisterActivity"/>
         <activity android:name=".ui.activity.MainActivity"/>
-        <activity android:name=".ui.activity.FruitDetailActivity"/>
+        <activity android:name=".ui.activity.FoodDetailActivity"/>
         <activity android:name=".ui.activity.PersonActivity"/>
         <activity android:name=".ui.activity.PasswordActivity"/>
         <activity android:name=".ui.activity.BrowseActivity"/>

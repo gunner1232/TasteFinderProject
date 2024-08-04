@@ -13,14 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.food.R
-import com.example.food.bean.Fruit
+import com.example.food.bean.Food
 import com.example.food.util.SPUtils
-import org.litepal.LitePal
-import org.litepal.crud.LitePalSupport
 
-class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: RecyclerView?) :
-    RecyclerView.Adapter<FruitAdapter.ViewHolder>() {
-    private val list: MutableList<Fruit>? = ArrayList()
+class FoodAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: RecyclerView?) :
+    RecyclerView.Adapter<FoodAdapter.ViewHolder>() {
+    private val list: MutableList<Food>? = ArrayList()
     private var mActivity: Context? = null
     private var mItemListener: ItemListener? = null
     fun setItemListener(itemListener: ItemListener?) {
@@ -30,7 +28,7 @@ class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         mActivity = viewGroup.context
         val view =
-            LayoutInflater.from(mActivity).inflate(R.layout.item_rv_fruit_list, viewGroup, false)
+            LayoutInflater.from(mActivity).inflate(R.layout.item_rv_food_list, viewGroup, false)
         return ViewHolder(view)
     }
 
@@ -87,7 +85,7 @@ class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: 
         return list!!.size
     }
 
-    fun addItem(listAdd: List<Fruit>?) {
+    fun addItem(listAdd: List<Food>?) {
         //If loading the first page, clear the data list first
         list!!.clear()
         if (listAdd != null) {
@@ -106,6 +104,6 @@ class FruitAdapter(private val llEmpty: LinearLayout?, private val rvfruitList: 
     }
 
     interface ItemListener {
-        fun ItemClick(fruit: Fruit?)
+        fun ItemClick(food: Food?)
     }
 }

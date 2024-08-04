@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.food.R
-import com.example.food.bean.Fruit
+import com.example.food.bean.Food
 import com.example.food.bean.User
 import com.example.food.util.SPUtils
 import com.example.food.util.StatusBarUtil
@@ -71,7 +71,7 @@ class OpeningActivity : AppCompatActivity() {
                     val length = fruitList.length()
                     while (i < length) {
                         val o = fruitList.getJSONObject(i)
-                        val fruit = Fruit(
+                        val food = Food(
                             o.getInt("typeId"),
                             o.getString("title"),
                             o.getString("img"),
@@ -79,16 +79,16 @@ class OpeningActivity : AppCompatActivity() {
                             o.getString("issuer"),
                             sf.format(Date())
                         )
-                        fruit.save() //save to the local
+                        food.save() //save to the local
                         i++
                     }
                     val user = User("admin", "root", "admin1", 22, "123456789@gmail.com")
                     user.save()
-                    val user2 = User("312", "312", "admin2", 25, "12321216789@gmail.com")
+                    val user2 = User("312", "312", "user1", 25, "12321216789@gmail.com")
                     user2.save()
-                    val user3 = User("313", "313", "admin3", 27, "142126789@gmail.com")
+                    val user3 = User("313", "313", "user2", 27, "142126789@gmail.com")
                     user3.save()
-                    val user4 = User("314", "314", "admin4", 18, "1532556789@gmail.com")
+                    val user4 = User("314", "314", "user3", 18, "1532556789@gmail.com")
                     user4.save()
                 } catch (e: IOException) {
                     e.printStackTrace()

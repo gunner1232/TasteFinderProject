@@ -12,13 +12,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.request.RequestOptions
 import com.example.food.R
-import com.example.food.bean.Fruit
+import com.example.food.bean.Food
 import com.example.food.bean.Orders
 import com.example.food.bean.User
-import com.example.food.ui.activity.FruitDetailActivity
+import com.example.food.ui.activity.FoodDetailActivity
 import com.example.food.util.SPUtils
 import org.litepal.LitePal
-import org.litepal.crud.LitePalSupport
 
 class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: RecyclerView?) :
     RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
@@ -47,11 +46,11 @@ class OrderAdapter(private val llEmpty: LinearLayout?, private val rvOrderList: 
             viewHolder.number.text = order.number
             viewHolder.date.text = order.date
             viewHolder.itemView.setOnClickListener {
-                val intent = Intent(mActivity, FruitDetailActivity::class.java)
-                val fruit = LitePal.where("title = ?", order.title).findFirst(
-                    Fruit::class.java
+                val intent = Intent(mActivity, FoodDetailActivity::class.java)
+                val food = LitePal.where("title = ?", order.title).findFirst(
+                    Food::class.java
                 )
-                intent.putExtra("fruit", fruit)
+                intent.putExtra("fruit", food)
                 mActivity!!.startActivity(intent)
             }
             val isAdmin = SPUtils.get(mActivity, SPUtils.IS_ADMIN, false) as Boolean
