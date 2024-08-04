@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--线性布局  LinearLayout 根布局-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -7,7 +6,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:background="@color/colorWhite">
-    <!--标题栏-->
+    <!--title bar-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,14 +19,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--表单布局-->
+        <!--Form Layout-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:orientation="vertical">
-            <!--账号-->
+            <!--account-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,7 +34,7 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:orientation="horizontal">
-                <!--TextView 文本  html的p标签-->
+                <!--TextView Text html p tag-->
                 <TextView
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
@@ -54,7 +53,7 @@
                     android:singleLine="true"
                     android:textSize="14dp" />
             </LinearLayout>
-            <!--昵称-->
+            <!--Nickname-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +61,7 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:orientation="horizontal">
-                <!--TextView 文本  html的p标签-->
+                <!--TextView Text html p tag-->
                 <TextView
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
@@ -81,7 +80,7 @@
                     android:singleLine="true"
                     android:hint="Please enter the nickname" />
             </LinearLayout>
-            <!--年龄-->
+            <!--age-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +88,7 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:orientation="horizontal">
-                <!--TextView 文本  html的p标签-->
+                <!--TextView Text html p tag-->
                 <TextView
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
@@ -109,7 +108,7 @@
                     android:singleLine="true"
                     android:hint="Please enter the age" />
             </LinearLayout>
-            <!--邮箱-->
+            <!--email-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,7 +116,7 @@
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:orientation="horizontal">
-                <!--TextView 文本  html的p标签-->
+                <!--TextView Text html p tag-->
                 <TextView
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
@@ -137,7 +136,7 @@
                     android:singleLine="true"
                     android:hint="Please enter the email" />
             </LinearLayout>
-            <!--密码-->
+            <!--password-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -162,7 +161,7 @@
                     android:singleLine="true"
                     android:hint="Please enter the password"/>
             </LinearLayout>
-            <!--确认密码-->
+            <!--Confirm Password-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -196,7 +195,7 @@
                 android:textSize="16dp"
                 android:text="Login now"
                 android:textColor="@color/colorPrimary"/>
-            <!--注册按钮-->
+            <!--Register Button-->
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"

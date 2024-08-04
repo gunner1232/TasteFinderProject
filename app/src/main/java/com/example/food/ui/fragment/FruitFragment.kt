@@ -62,7 +62,12 @@ override fun onCreateView(
     llEmpty = view.findViewById(R.id.ll_empty)
     etQuery = view.findViewById(R.id.et_query)
     ivSearch = view.findViewById(R.id.iv_search)
+
     btnAdd = view.findViewById<View>(R.id.btn_add) as FloatingActionButton
+
+
+
+
     //Get Control
     initView()
     //Soft keyboard search
@@ -89,7 +94,9 @@ override fun onCreateView(
      */
     private fun initView() {
         mIsAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
-        btnAdd!!.visibility = if (mIsAdmin!!) View.VISIBLE else View.GONE
+//        btnAdd!!.visibility = if (mIsAdmin!!) View.VISIBLE else View.GONE
+
+        btnAdd!!.visibility =  View.GONE
         tabTitle!!.tabMode = TabLayout.MODE_SCROLLABLE
 
         //Add tab names to TabLayout

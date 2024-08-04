@@ -39,7 +39,7 @@ class FruitDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fruit_detail)
+        setContentView(R.layout.activity_food_detail)
 
         ivImg = findViewById(R.id.img)
         tvTitle = findViewById(R.id.title)

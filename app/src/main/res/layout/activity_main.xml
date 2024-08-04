@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
-        <!--标题栏-->
+        <!--title bar-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:textColor="@drawable/selector_main_rb_text"
                 android:textSize="12dp"
                 android:background="@null"
-                android:text="用户管理"/>
+                android:text="user management"/>
             <RadioButton
                 android:id="@+id/rb_main_user"
                 android:layout_weight="1"
