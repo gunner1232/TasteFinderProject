@@ -47,7 +47,7 @@ class UserAdapter(private val llEmpty: LinearLayout?, private val rvUserList: Re
                     mActivity!!
                 )
                 dialog.setMessage("Want to delete this user?")
-                dialog.setPositiveButton("Yes") { dialog, which -> //删除收藏记录和浏览记录
+                dialog.setPositiveButton("Yes") { dialog, which -> //Delete favorites and browsing history
                     val browses = LitePal.where("account = ?", user.account).find(
                         Browse::class.java
                     )

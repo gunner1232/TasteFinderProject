@@ -95,11 +95,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="20dp"/>
-
-
-
-
-
         </RelativeLayout>
     </LinearLayout>
 

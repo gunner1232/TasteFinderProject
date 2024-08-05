@@ -17,8 +17,6 @@ import com.example.food.widget.ActionBar
 import com.example.food.widget.ActionBar.ActionBarClickListener
 import org.litepal.LitePal
 
-//import org.litepal.crud.DataSupport
-
 /**
  * Browsing History
  */

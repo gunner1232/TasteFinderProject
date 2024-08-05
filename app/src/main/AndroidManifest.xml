@@ -28,7 +28,11 @@
         <activity android:name=".ui.activity.PersonActivity"/>
         <activity android:name=".ui.activity.PasswordActivity"/>
         <activity android:name=".ui.activity.BrowseActivity"/>
-        <activity android:name=".ui.activity.AddFruitActivity"/>
+
+
+<!--        <activity android:name=".ui.activity.AddFruitActivity"/>-->
+
+
         <activity android:name=".ui.activity.UserDetailActivity"/>
 
     </application>

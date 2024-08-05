@@ -4,16 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-
         <!--list-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            
-
-
             <LinearLayout
                 android:id="@+id/person"
                 android:layout_width="match_parent"
@@ -34,30 +29,7 @@
                     android:text="Profile"
                     android:textAlignment="center"
                     android:textSize="27sp"
-                    android:textColor="#ffffff"
-
-                    />
-
-                <!--<ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_person"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:text="个人信息"
-                    android:textSize="14dp"
-                    android:textColor="@color/colorBlack"
-                    android:layout_gravity="center_vertical"/>
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_right"/>-->
-
+                    android:textColor="#ffffff" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/security"

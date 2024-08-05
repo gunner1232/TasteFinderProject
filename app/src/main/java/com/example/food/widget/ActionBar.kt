@@ -1,5 +1,4 @@
 package com.example.food.widget
-
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
@@ -12,8 +11,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.graphics.ColorUtils
 import com.example.food.R
-
-
 /**
  * customizable ActionBar
  */

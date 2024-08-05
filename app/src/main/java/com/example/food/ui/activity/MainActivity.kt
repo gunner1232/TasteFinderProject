@@ -14,7 +14,6 @@ import com.example.food.MyApplication
 import com.example.food.ui.fragment.FoodFragment
 import com.example.food.ui.fragment.OrderFragment
 import com.example.food.ui.fragment.UserFragment
-import com.example.food.ui.fragment.UserManageFragment
 import com.example.food.util.SPUtils
 import com.example.food.widget.ActionBar
 import com.example.food.widget.ActionBar.ActionBarClickListener
@@ -137,7 +136,6 @@ class MainActivity : Activity() {
                 when (fragmentIndex) {
                     0 -> fragments[fragmentIndex] = FoodFragment()
                     1 -> fragments[fragmentIndex] = OrderFragment()
-                    2 -> fragments[fragmentIndex] = UserManageFragment()
                     3 -> fragments[fragmentIndex] = UserFragment()
                 }
             } else {

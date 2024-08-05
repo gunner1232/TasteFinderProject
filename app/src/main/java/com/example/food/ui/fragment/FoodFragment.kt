@@ -63,10 +63,6 @@ override fun onCreateView(
     ivSearch = view.findViewById(R.id.iv_search)
 
 //    btnAdd = view.findViewById<View>(R.id.btn_add) as FloatingActionButton
-
-
-
-
     //Get Control
     initView()
     //Soft keyboard search
@@ -81,10 +77,6 @@ override fun onCreateView(
         }
         false
     })
-//    btnAdd?.setOnClickListener {
-//        val intent = Intent(myActivity, AddFruitActivity::class.java)
-//        startActivityForResult(intent, 100)
-//    }
     return view
 }
 
@@ -93,11 +85,7 @@ override fun onCreateView(
      */
     private fun initView() {
         mIsAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
-//        btnAdd!!.visibility = if (mIsAdmin!!) View.VISIBLE else View.GONE
-
-//        btnAdd!!.visibility =  View.GONE
         tabTitle!!.tabMode = TabLayout.MODE_SCROLLABLE
-
         //Add tab names to TabLayout
         for (i in title.indices) {
             tabTitle!!.addTab(tabTitle!!.newTab().setText(title[i]))
@@ -114,28 +102,20 @@ override fun onCreateView(
         rvfruitList!!.adapter = mfruitAdapter
         loadData()
 
-
-
         mfruitAdapter!!.setItemListener(object : FoodAdapter.ItemListener {
             override fun ItemClick(food: Food?) { val isAdmin = SPUtils.get(myActivity, SPUtils.IS_ADMIN, false) as Boolean
                 val account = SPUtils.get(myActivity, SPUtils.ACCOUNT, "") as String
                 if (account.isEmpty()) { // Not logged in, redirected to login page
-//                    MyApplication.Instance.getMainActivity().finish()
                     MyApplication.Instance?.mainActivity?.finish()
                     startActivity(Intent(myActivity, LoginActivity::class.java))
                 } else { // already logged
                     val intent =
-//                        if (isAdmin) {
-//                        Intent(myActivity, AddFruitActivity::class.java)
-//                    } else {
                         Intent(myActivity, FoodDetailActivity::class.java)
-//                    }
                     intent.putExtra("fruit", food)
                     startActivityForResult(intent, 100)
                 }
             }
         })
-
 
         tabTitle!!.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
